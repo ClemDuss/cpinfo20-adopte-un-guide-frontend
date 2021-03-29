@@ -1,0 +1,90 @@
+.header{
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    background: #195819;
+    height: 3.5rem;
+}
+
+.header .brand{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.header-logo{
+    height: 100%
+}
+
+.header .header-title{
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+
+
+/* USER INFOS */
+.header .user-settings .user-info{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5em;
+    color: white;
+    cursor: pointer;
+    transition: all 0.25s ease
+}
+
+.header .user-settings .user-info img{
+    margin-left: 0.5em;
+    background: rgb(121, 121, 121);
+    height: 2em;
+    width: 2em;
+}
+
+.header .user-settings:hover .user-info{
+    background-color: #2c722c;
+}
+
+
+
+.user-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    margin-right: 0.4em;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    /* display: flex; */
+    flex-direction: column;
+    border-radius: 0.4em;
+}
+
+.user-settings:hover .user-options{
+    display: flex;
+}
+
+.user-options::before{
+    content: " ";
+    position: absolute;
+    top: -0.75em;
+    right: 0.6em;
+    width: 0;
+	height: 0;
+	border-left: 0.5em solid transparent;
+	border-right: 0.5em solid transparent;
+	border-bottom: 0.75em solid #fff;
+}
+
+.user-options a{
+    padding: 0.5em 0.75em;
+    text-decoration: none;
+    color: black;
+}
+
+.user-options a:hover{
+    background-color: lightgray;
+}
