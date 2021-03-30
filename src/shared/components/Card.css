@@ -1,0 +1,42 @@
+.MuiGrid-item{
+    padding: 0 !important;
+}
+
+.card{
+    padding: 0.4em !important;
+}
+
+.card-inner{
+    border: 1px solid black;
+    border-radius: 0.5em;
+    background-color: #F5F5F5;
+}
+
+.card-inner img{
+    background: #9e9e9e;
+    width: 100%;
+    border-radius: 0.5em 0.5em 0 0;
+}
+
+.card-inner .card-body{
+    padding: 0.5em;
+}
+
+.card-inner .card-body p{
+    text-align: justify;
+}
+
+.card-inner .card-body h2{
+    margin: 0.2em 0;
+}
+
+.card-inner .card-body h4{
+    margin: 0.2em 0;
+    font-weight: normal;
+    font-style: italic;
+    color: rgb(77, 77, 77);
+}
+
+.card-inner .card-body h3{
+    margin: 0.2em 0;
+}

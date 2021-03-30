@@ -2,7 +2,7 @@
     position: fixed;
     width: 100%;
     z-index: 999;
-    background: #195819;
+    background: var(--green-mountain);
     height: 3.5rem;
 }
 
@@ -24,11 +24,41 @@
 
 
 
-/* USER INFOS */
-.header .user-settings .user-info{
+.right-elements{
     position: absolute;
     top: 0;
     right: 0;
+    height: 100%;
+    display: flex;
+}
+
+.search-bar{
+    height: 100%;
+    margin-right: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input{
+    padding: 0.25em 0.5em;
+    border-radius: 0.25em;
+    border: 0.1em solid white;
+    color: white;
+    background: var(--green-mountain);
+}
+
+::placeholder{
+    color: rgb(187, 187, 187);
+    opacity: 1;
+}
+
+
+/* USER INFOS */
+.user-settings{
+    height: 100%;
+}
+
+.header .user-settings .user-info{
     height: 100%;
     display: flex;
     align-items: center;

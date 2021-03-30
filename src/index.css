@@ -1,3 +1,7 @@
+:root{
+  --green-mountain: #195819;
+}
+
 body {
   margin: 0;
   background-color: #F5F5F5;
