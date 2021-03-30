@@ -5,13 +5,73 @@ import Grid from '@material-ui/core/Grid';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import {TerrainOutlined, Terrain, Timer} from '@material-ui/icons';
 
 class Card extends React.Component {
     render(){
+        /**
+         * Fonction au click sur une "Card" randonnée
+         * @param {int} hikeId Id de la course clickée
+         */
+        function openHikeDetails(hikeId){
+            alert("rando n°" + hikeId);
+        }
+
+        /**
+         * Va rnevoyer les 5 icons de difficulté pour matérialiser le chiffre renseigné
+         * @param {int} difficulty Niveau de difficulté sur 5
+         */
+        function dispDifficulty(difficulty){
+            let items = [];
+
+            for(let i=1; i <= 5; i++){
+                // on ajoute n montagnes pleines, et on complète avec des vides pour arriver à 5
+                i <= difficulty ? items.push(<Terrain/>) : items.push(<TerrainOutlined/>);
+            }
+
+            return items;
+        }
+
+        /**
+         * Renvoie un temps en chaine (ex:2.5 => 2h30)
+         * @param {float} time Temps en heures à convertir en chaine
+         */
+        function timeToString(time){
+            let result = "";
+            let decimal = time - Math.trunc(time);
+            time = Math.trunc(time);
+
+            if(time >= 24){
+                //si le temps de la rando est de plus de 24 h
+                let days = Math.trunc(time/24);
+                result += days + "j "
+                time = time - (24 * days);
+            }
+
+            if(decimal > 0){
+                let minutes = decimal * 60;
+                result += time + "h" + minutes;
+            }else{
+                result += time + "h";
+            }
+
+            return result;
+        }
+
         return (
             <Grid item lg={3} md={4} sm={6} xs={12} className="card">
-                <div className="card-inner">
-                    <img src={logo} alt={this.props.title ?? "Photo de la rando"}/>
+                <div className="card-inner" onClick={() => openHikeDetails(this.props.hikeId)}>
+                    <div className="card-header">
+                        <div className="hike-picture">
+                            <img src={logo} alt={this.props.title ?? "Photo de la rando"}/>
+                        </div>
+                        <div className="hike-duration" title="Temps moyen pour l'ascention">
+                            <Timer/> <span>{timeToString(this.props.duration)}</span>
+                        </div>
+                        <div className="hike-difficulty" title={"Difficulté : " + this.props.difficulty + "/5"}>
+                            {dispDifficulty(this.props.difficulty)}
+                        </div>
+                    </div>
                     <div className="card-body">
                         <h2>{this.props.title ?? "Titre"}</h2>
                         <h4><FontAwesomeIcon icon={faMapMarkerAlt} /> {this.props.location ?? "Lieu"}</h4>
