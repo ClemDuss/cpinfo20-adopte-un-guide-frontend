@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Header from './Header';
+import Home from './view/Home/Home';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <Header />
-    <App />
+    {/* <App /> */}
+    <Home />
   </React.StrictMode>,
   document.getElementById('root')
 );
