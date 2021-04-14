@@ -1,11 +1,12 @@
 import React from 'react';
-import logo from './../../logo.svg';
+import logo from './../../../logo.svg';
 import './Card.css';
 import Grid from '@material-ui/core/Grid';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import {TerrainOutlined, Terrain, Timer} from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 class Card extends React.Component {
     render(){
@@ -14,7 +15,7 @@ class Card extends React.Component {
          * @param {int} hikeId Id de la course clickée
          */
         function openHikeDetails(hikeId){
-            alert("rando n°" + hikeId);
+            // alert("rando n°" + hikeId);
         }
 
         /**
@@ -60,25 +61,28 @@ class Card extends React.Component {
 
         return (
             <Grid item lg={3} md={4} sm={6} xs={12} className="card">
-                <div className="card-inner" onClick={() => openHikeDetails(this.props.hikeId)}>
-                    <div className="card-header">
-                        <div className="hike-picture">
-                            <img src={logo} alt={this.props.title ?? "Photo de la rando"}/>
+                <Link to={`randos/${this.props.hikeId}`} className="card-link">
+                    <div className="card-inner">
+                    {/* <div className="card-inner" onClick={() => openHikeDetails(this.props.hikeId)}> */}
+                        <div className="card-header">
+                            <div className="hike-picture">
+                                <img src={logo} alt={this.props.title ?? "Photo de la rando"}/>
+                            </div>
+                            <div className="hike-duration" title="Temps moyen pour l'ascention">
+                                <Timer/> <span>{timeToString(this.props.duration)}</span>
+                            </div>
+                            <div className="hike-difficulty" title={"Difficulté : " + this.props.difficulty + "/5"}>
+                                {dispDifficulty(this.props.difficulty)}
+                            </div>
                         </div>
-                        <div className="hike-duration" title="Temps moyen pour l'ascention">
-                            <Timer/> <span>{timeToString(this.props.duration)}</span>
-                        </div>
-                        <div className="hike-difficulty" title={"Difficulté : " + this.props.difficulty + "/5"}>
-                            {dispDifficulty(this.props.difficulty)}
+                        <div className="card-body">
+                            <h2>{this.props.title ?? "Titre"}</h2>
+                            <h4><FontAwesomeIcon icon={faMapMarkerAlt} /> {this.props.location ?? "Lieu"}</h4>
+                            <h3>{this.props.guide ?? "Nom du Guide"}</h3>
+                            <p>{this.props.shortDescription ?? "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}</p>
                         </div>
                     </div>
-                    <div className="card-body">
-                        <h2>{this.props.title ?? "Titre"}</h2>
-                        <h4><FontAwesomeIcon icon={faMapMarkerAlt} /> {this.props.location ?? "Lieu"}</h4>
-                        <h3>{this.props.guide ?? "Nom du Guide"}</h3>
-                        <p>{this.props.shortDescription ?? "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}</p>
-                    </div>
-                </div>
+                </Link>
             </Grid>
         );
     }

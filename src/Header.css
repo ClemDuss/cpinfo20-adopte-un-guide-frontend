@@ -1,3 +1,6 @@
+/* ****** */
+/* HEADER */
+/* ****** */
 .header{
     position: fixed;
     width: 100%;
@@ -6,26 +9,38 @@
     height: 3.5rem;
 }
 
+/* ***** */
+/* BRAND */
+/* ***** */
 .header .brand{
     display: flex;
     align-items: center;
     height: 100%;
     float: left;
     cursor: pointer;
+    color: unset;
+    text-decoration: unset;
 }
 
 .header-logo{
-    height: 100%
+    margin-top: 10%;
+    height: 80%;
+    background: white;
+    color: var(--green-mountain);
+    border-radius: 5px;
+    margin: 0 0.5em;
 }
 
 .header .header-title{
     color: white;
     font-weight: bold;
     letter-spacing: 0.05em;
+    margin-right: 0.5em;
 }
 
-
-
+/***************************/
+/* PARTIE DROITE DU HEADER */
+/***************************/
 .right-elements{
     position: absolute;
     top: 0;
@@ -70,8 +85,9 @@
     top:-0.5em;
 }
 
-
-/* USER INFOS */
+/* ********************* */
+/* USER INFOS / SETTINGS */
+/* ********************* */
 .user-settings{
     height: 100%;
 }
@@ -87,10 +103,28 @@
 }
 
 .header .user-settings .user-info img{
+    position: relative;
     margin-left: 0.5em;
     background: rgb(121, 121, 121);
     height: 2em;
     width: 2em;
+}
+
+.header .user-settings .user-info::before{
+    position: absolute;
+    content: "10";
+    height: 1em;
+    width: 1em;
+    background-color: red;
+    top: 0.5em;
+    right: 0.5em;
+    border-radius: 50%;
+    z-index: 99;
+    padding: 0.2em;
+    font-size: 0.75em;
+    display: flex;
+    align-items: center;
+    justify-content:center;
 }
 
 .header .user-settings:hover .user-info{
@@ -98,7 +132,7 @@
 }
 
 
-
+/* dropdown menu */
 .user-options {
     display: none;
     position: absolute;
@@ -106,15 +140,16 @@
     margin-right: 0.4em;
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    /* display: flex; */
     flex-direction: column;
     border-radius: 0.4em;
 }
 
+/* pour que le dropdown ne disparaisse pas quand on a le curseur dessus */
 .user-settings:hover .user-options{
     display: flex;
 }
 
+/* triangle au dessus du dropdown */
 .user-options::before{
     content: " ";
     position: absolute;
@@ -127,12 +162,34 @@
 	border-bottom: 0.75em solid #fff;
 }
 
-.user-options a{
+
+/* Elements de la dropdown */
+.user-options div{
     padding: 0.5em 0.75em;
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
 
-.user-options a:hover{
+.user-options div:hover{
     background-color: lightgray;
+}
+
+.user-options div:first-child{
+    border-radius: 0.4em 0.4em 0 0;
+}
+
+.user-options div:last-child{
+    border-radius: 0 0 0.4em 0.4em;
+    color: var(--red);
+}
+
+/* pour afficher le nombre de msg dans la messagerie */
+.user-options .mail-box:after{
+    content: "10";
+    background-color: var(--red);
+    color: white;
+    padding: 0.1em 0.3em;
+    border-radius: 1em;
+    margin-left: 0.5em;
 }

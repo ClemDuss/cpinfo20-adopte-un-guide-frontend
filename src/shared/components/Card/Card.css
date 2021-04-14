@@ -6,6 +6,11 @@
     padding: 0.4em !important;
 }
 
+.card-link{
+    text-decoration: none;
+    color: unset;
+}
+
 .card-inner{
     border: 1px solid black;
     border-radius: 0.5em;

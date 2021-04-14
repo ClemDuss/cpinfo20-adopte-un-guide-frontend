@@ -1,13 +1,14 @@
 import logo from './logo.svg';
 import './Header.css';
+import {Link} from 'react-router-dom';
 
 function Header() {
   return (
     <div className="header">
-        <div className="brand">
-            <img src={logo} className="header-logo" alt="logo" />
+        <Link to="/" className="brand">
+            <img src="" className="header-logo" alt="logo" />
             <div className="header-title">Adopte un Guide</div>
-        </div>
+        </Link>
         <div className="right-elements">
           <div className="search-bar">
             <input placeholder="Rechercher" />
@@ -20,8 +21,9 @@ function Header() {
               <img src={logo} className="circle" />
             </div>
             <div class="user-options">
-              <a href="#">Paramètres</a>
-              <a href="#">Déconnexion</a>
+              <div>Paramètres</div>
+              <div className="mail-box">Messagerie</div>
+              <div>Déconnexion</div>
             </div>
           </div>
         </div>
