@@ -92,7 +92,7 @@
     height: 100%;
 }
 
-.header .user-settings .user-info{
+.header .user-settings :is(.user-info, .login-button){
     height: 100%;
     display: flex;
     align-items: center;
@@ -127,7 +127,7 @@
     justify-content:center;
 }
 
-.header .user-settings:hover .user-info{
+.header .user-settings:hover :is(.user-info, .login-button){
     background-color: var(--green-mountain-hover);
 }
 
@@ -181,13 +181,13 @@
 
 .user-options div:last-child{
     border-radius: 0 0 0.4em 0.4em;
-    color: var(--red);
+    color: var(--error);
 }
 
 /* pour afficher le nombre de msg dans la messagerie */
 .user-options .mail-box:after{
     content: "10";
-    background-color: var(--red);
+    background-color: var(--error);
     color: white;
     padding: 0.1em 0.3em;
     border-radius: 1em;

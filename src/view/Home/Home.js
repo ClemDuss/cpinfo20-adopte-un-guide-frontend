@@ -11,11 +11,12 @@ import allHikes from './../../shared/data/allHikes';
 
 function Home() {
   return (
-    <div className="home">
+    <div key={'home'} className="home">
         <Container maxWidth="lg">
             <Grid container className="home-content">
                 {allHikes.map(someHike =>
                     <Card 
+                        key={someHike.id}
                         title={someHike.title}
                         location={someHike.location}
                         guide={someHike.guide}
@@ -23,6 +24,7 @@ function Home() {
                         hikeId={someHike.hikeId}
                         difficulty={someHike.difficulty}
                         duration={someHike.duration}
+                        mainPicture={someHike.pictures[0]}
                     />
                 )}
             </Grid>

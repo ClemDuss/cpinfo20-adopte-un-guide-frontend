@@ -1,32 +1,77 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './Header.css';
-import {Link} from 'react-router-dom';
+import logo from './logo.svg';
+import SignWithGoogleButton from './shared/components/SignWithGoogleButton/SignWithGoogleButton';
 
-function Header() {
+import {Link} from 'react-router-dom';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@material-ui/core';
+
+import firebase from 'firebase';
+
+const provider = new firebase.auth.GoogleAuthProvider();
+
+//transition permettant l'arrivée de la Dialog par le haut
+const fromTopTransition = React.forwardRef(function fromTopTransition(props, ref){
+	return <Slide direction="down" ref={ref} {...props} />;
+});
+
+function Header({user, firebaseApp}) {
+	const [loginOpen, setLoginOpen] = useState(false);
+
   return (
     <div className="header">
         <Link to="/" className="brand">
-            <img src="" className="header-logo" alt="logo" />
+            <img src={logo} alt={'logo'} className="header-logo" />
             <div className="header-title">Adopte un Guide</div>
         </Link>
         <div className="right-elements">
-          <div className="search-bar">
-            <input placeholder="Rechercher" />
-          </div>
-          <div className="user-settings">
-            <div className="user-info">
-              <span className="user-name">
-                  Prénom NOM
-              </span>
-              <img src={logo} className="circle" />
-            </div>
-            <div class="user-options">
-              <div>Paramètres</div>
-              <div className="mail-box">Messagerie</div>
-              <div>Déconnexion</div>
-            </div>
-          </div>
+			<div className="search-bar">
+				<input placeholder="Rechercher" />
+			</div>
+			{user &&
+				<div className="user-settings">
+				<div className="user-info">
+					<span className="user-name">
+						{user.displayName}
+					</span>
+					<img src={user.picture} className="circle" />
+				</div>
+				<div class="user-options">
+					<div>Paramètres</div>
+					<div className="mail-box">Messagerie</div>
+					<div onClick={() => firebaseApp.auth().signOut()}>Déconnexion</div>
+				</div>
+				</div>
+			}
+			{!user &&
+				// <div className="user-settings" onClick={() => firebaseApp.auth().signInWithPopup(provider)}>
+				<div className="user-settings" onClick={() => setLoginOpen(true)}>
+					<div className="login-button">
+						Connexion
+					</div>
+				</div>
+			}
         </div>
+
+		<Dialog
+			open={loginOpen}
+			TransitionComponent={fromTopTransition}
+			keepMounted
+			onClose={() => setLoginOpen(false)}
+			aria-labelledby="login-dialog-title"
+			aria-describedby="login-dialog-description"
+		>
+			<DialogTitle id="login-dialog-title">Connexion</DialogTitle>
+			<DialogContent>
+				{/* <DialogContentText id="login-dialog-description">
+					Hello connecte toi merde !
+				</DialogContentText> */}
+				<SignWithGoogleButton firebaseApp={firebaseApp} setLoginOpen={setLoginOpen} />
+			</DialogContent>
+			<DialogActions>
+				<Button color={'secondary'} onClick={() => setLoginOpen(false)}>ANNULER</Button>
+			</DialogActions>
+		</Dialog>
     </div>
   );
 }

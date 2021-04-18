@@ -6,7 +6,8 @@ const allHikes = [
         shortDescription: "Une rando dont le sommet se situe à un peu plus de 2700m. Des passages aériens notamment sur la fin. la seconde moitiée de l'itinéraire est de la rando/grimpe dans le rocher.",
         hikeId: "2",
         difficulty: 4,
-        duration: 2.5
+        duration: 2.5,
+        pictures: ['dev/pte-percee-croix.jpg', 'dev/pte-percee.jpg']
     },
     {
         title: "Lac Blanc",
@@ -15,7 +16,8 @@ const allHikes = [
         shortDescription: "Au départ d'argentière, peu paitre un peu long mais sans difficulté. Une magnifique vue sur le massif du Mont-Blanc tout le long de la ranonnée.",
         hikeId: "4",
         difficulty: 2,
-        duration: 3
+        duration: 3,
+        pictures: ['dev/lac-blanc.jpg']
     },
     {
         title: "L'Étale",
@@ -24,7 +26,8 @@ const allHikes = [
         shortDescription: "Une rando qui se terrmine très raide, limite escalade mais sans assurage nécessaire. Possible traversée vers la Mandallaz une fois au sommet.",
         hikeId: "3",
         difficulty: 4,
-        duration: 4
+        duration: 4,
+        pictures: ['dev/etale.jpg']
     },
     {
         title: "La Jonction",
@@ -33,7 +36,8 @@ const allHikes = [
         shortDescription: "Une randonnée qui est longue, mais une arrivée au sommet à la jontcion entre le glacier des Bossons et l'autre. on se sent encore plus proche du Mont-Blanc!.",
         hikeId: "5",
         difficulty: 3,
-        duration: 4
+        duration: 4,
+        pictures: ['dev/jonction.jpg', 'dev/jonction2.jpg', 'dev/jonction3.jpg']
     },
     {
         title: "Le Buet",
@@ -42,7 +46,8 @@ const allHikes = [
         shortDescription: "Une rando avec une nuit en refuge. C'est une très bonne initiation à la haute montagne avec un sommet à plus de 3000m",
         hikeId: "6",
         difficulty: 5,
-        duration: 36
+        duration: 36,
+        pictures: []
     }
 ]
 

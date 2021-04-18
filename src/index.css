@@ -1,15 +1,28 @@
 :root{
+  /* THEME */
   --green-mountain: #195819;
   --green-mountain-hover: #2c722c;
-  --green: rgb(0,159,52);
-  --red: rgb(218,15,0);
+  --dark-grey: rgb(61, 61, 61);
+  --light-grey: #E6E6E6;
+
+  /* STYLE */
+  --muted: rgb(102, 102, 102);
+
+  /* STATES */
+  --success: rgb(0,159,52);
+  --error: rgb(218,15,0);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+html{
+  height: 100%;
+}
+
 body {
   margin: 0;
   background-color: #F5F5F5;
+  height: 100%;
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
@@ -21,6 +34,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root{
+  height: 100%;
 }
 
 .circle{

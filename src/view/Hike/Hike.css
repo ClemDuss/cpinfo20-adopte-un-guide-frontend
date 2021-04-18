@@ -1,0 +1,41 @@
+.hike-details{
+    padding-top: 5rem;
+}
+
+.hike-details-content{
+    background-color: #E6E6E6;
+    border-color: #a1a1a1 !important;
+    border: 0.1rem solid;
+    border-bottom: 0;
+    padding: 0.5rem;
+    border-radius: 1rem 1rem 0 0;
+    display: flex;
+}
+
+.hike-pictures{
+    padding: 1em !important;
+}
+
+.hike-pictures img{
+    width: 100%;
+    border-radius: 0.5em;
+    border: 0.2em rgb(78, 78, 78) solid;
+}
+
+.hike-infos{
+    padding: 1em !important;
+}
+
+.hike-infos h4{
+    font-weight: unset;
+    margin: 0.5em 0;
+}
+
+.hike-title{
+    margin: 0.5em 0;
+}
+
+.hike-location{
+    font-style: italic;
+    color: var(--muted)
+}

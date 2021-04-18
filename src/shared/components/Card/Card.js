@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './../../../logo.svg';
+import landscape from './../../../assets/img/1.jpg';
 import './Card.css';
 import Grid from '@material-ui/core/Grid';
 
@@ -60,13 +60,19 @@ class Card extends React.Component {
         }
 
         return (
-            <Grid item lg={3} md={4} sm={6} xs={12} className="card">
+            <Grid key={this.props.key} item lg={3} md={4} sm={6} xs={12} className="card">
                 <Link to={`randos/${this.props.hikeId}`} className="card-link">
                     <div className="card-inner">
                     {/* <div className="card-inner" onClick={() => openHikeDetails(this.props.hikeId)}> */}
                         <div className="card-header">
                             <div className="hike-picture">
-                                <img src={logo} alt={this.props.title ?? "Photo de la rando"}/>
+                                { this.props.mainPicture != undefined &&
+                                    <div className="hike-main-picture" style={{backgroundImage: `url(/img/${this.props.mainPicture})`}}></div>
+                                    // <img src={`/img/${this.props.mainPicture}`} alt={this.props.title ?? "Photo de la rando"}/>
+                                }
+                                { this.props.mainPicture == undefined &&
+                                    <img src={landscape} alt={this.props.title ?? "Photo de la rando"} style={{width: '100%', borderRadius: '0.5em 0.5em 0 0'}} />
+                                }
                             </div>
                             <div className="hike-duration" title="Temps moyen pour l'ascention">
                                 <Timer/> <span>{timeToString(this.props.duration)}</span>

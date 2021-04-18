@@ -27,10 +27,15 @@
 
 
 /* CARD HEADER */
-.card-inner img{
+.card-inner .hike-main-picture{
     background: #9e9e9e;
     width: 100%;
     border-radius: 0.5em 0.5em 0 0;
+
+    /* à enlever si on repasse sur un mode d'affichage d'image simple */
+    background-size: cover;
+    background-position: center;
+    height: 14rem;
 }
 
 .card-header :is(.hike-difficulty, .hike-duration){
