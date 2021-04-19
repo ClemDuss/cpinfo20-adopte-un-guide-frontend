@@ -9,8 +9,10 @@
   --muted: rgb(102, 102, 102);
 
   /* STATES */
-  --success: rgb(0,159,52);
-  --error: rgb(218,15,0);
+  --success: rgb(0, 141, 47);
+  --success-hover: rgb(1, 117, 39);
+  --error: rgb(190, 13, 0);
+  --error-hover: rgb(167, 11, 0);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
