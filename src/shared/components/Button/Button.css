@@ -1,0 +1,55 @@
+.button{
+    color: white;
+    padding: 0.5em 1em;
+    margin: 0.3em;
+    border-radius: 0.3em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease
+}
+
+.button:hover{
+    box-shadow: 0 0 0.3em black;
+}
+
+
+/* ERROR */
+.button.button-error{
+    background-color: var(--error);
+}
+
+.button.button-error:hover{
+    background-color: var(--error-hover);
+}
+
+.button.button-error.outlined{
+    border: 0.1em solid var(--error);
+    background-color: unset;
+    color: var(--error);
+}
+
+.button.button-error.outlined:hover{
+    border-color: var(--error-hover);
+    color: var(--error-hover);
+}
+
+
+/* SUCCESS */
+.button.button-success{
+    background-color: var(--success);
+}
+
+.button.button-success:hover{
+    background-color: var(--success-hover);
+}
+
+.button.button-success.outlined{
+    border: 0.1em solid var(--success);
+    background-color: unset;
+    color: var(--success);
+}
+
+.button.button-success.outlined:hover{
+    border-color: var(--success-hover);
+    color: var(--success-hover);
+}
