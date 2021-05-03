@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router className="page">
       <Header user={user} firebaseApp={firebaseApp} />
       <Switch>
         <Route path="/" exact component={Home}></Route>

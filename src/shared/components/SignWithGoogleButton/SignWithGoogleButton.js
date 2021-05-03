@@ -7,9 +7,11 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 function SignWithGoogleButton ({firebaseApp, setLoginOpen}){
     return (
-        <div className="google-signin-button" onClick={() => {firebaseApp.auth().signInWithPopup(provider); setLoginOpen(false);}}>
-            <img src={googleLogo} className="g-logo" />
-            <div className="g-label">Se connecter avec Google</div>
+        <div style={{display: "flex", justifyContent: "center"}}>
+            <div className="google-signin-button" onClick={() => {firebaseApp.auth().signInWithPopup(provider); setLoginOpen(false);}}>
+                <img src={googleLogo} className="g-logo" />
+                <div className="g-label">Se connecter avec Google</div>
+            </div>
         </div>
     );
 }

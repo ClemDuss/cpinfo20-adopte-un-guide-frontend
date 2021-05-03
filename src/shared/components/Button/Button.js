@@ -7,6 +7,8 @@ export default function Button({text, theme, outlined}){
                 `button
                 ${theme == 'error' ? ' button-error' : ''}
                 ${theme == 'success' ? ' button-success' : ''}
+                ${theme == 'primary' ? ' button-primary' : ''}
+                ${theme == 'green-mtn' ? ' button-green-mtn' : ''}
                 ${outlined ? ' outlined' : ''}`
             }
         >

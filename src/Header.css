@@ -215,3 +215,45 @@
     border-radius: 1em;
     margin-left: 0.5em;
 }
+
+
+
+
+/*******************/
+/* CONNECTION FORM */
+/*******************/
+.signin-form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3em;
+}
+
+.signin-form .submit-btn{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.signin-form .submit-btn a{
+    margin-right: 0.3rem;
+    color: var(--green-mountain);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.signin-form .submit-btn :is(a:hover, a:focus){
+    color: var(--green-mountain-hover)
+}
+
+.signin-form .MuiGrid-item MuiTextField-root{
+    width: 100%;
+}
+
+.signin-form .MuiGrid-item.name{
+    padding-right: 0.5em !important;
+}
+
+.signin-form .MuiGrid-item.firstname{
+    padding-left: 0.5em !important;
+}

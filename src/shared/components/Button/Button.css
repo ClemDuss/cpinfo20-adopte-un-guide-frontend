@@ -5,7 +5,8 @@
     border-radius: 0.3em;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease
+    transition: all 0.2s ease;
+    background-color: var(--primary);
 }
 
 .button:hover{
@@ -52,4 +53,46 @@
 .button.button-success.outlined:hover{
     border-color: var(--success-hover);
     color: var(--success-hover);
+}
+
+
+/* PRIMARY */
+.button.button-primary{
+    background-color: var(--primary);
+}
+
+.button.button-primary:hover{
+    background-color: var(--primary-hover);
+}
+
+.button.button-primary.outlined{
+    border: 0.1em solid var(--primary);
+    background-color: unset;
+    color: var(--primary);
+}
+
+.button.button-primary.outlined:hover{
+    border-color: var(--primary-hover);
+    color: var(--primary-hover);
+}
+
+
+/* GREEN MOUTAIN */
+.button.button-green-mtn{
+    background-color: var(--green-mountain);
+}
+
+.button.button-green-mtn:hover{
+    background-color: var(--green-mountain-hover);
+}
+
+.button.button-green-mtn.outlined{
+    border: 0.1em solid var(--green-mountain);
+    background-color: unset;
+    color: var(--green-mountain);
+}
+
+.button.button-green-mtn.outlined:hover{
+    border-color: var(--green-mountain-hover);
+    color: var(--green-mountain-hover);
 }

@@ -5,7 +5,7 @@ import SignWithGoogleButton from './shared/components/SignWithGoogleButton/SignW
 import Button from './shared/components/Button/Button';
 
 import {Link} from 'react-router-dom';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@material-ui/core';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, TextField, Grid } from '@material-ui/core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
@@ -30,8 +30,25 @@ function onChangeSearch(value){
 	}
 }
 
+
+function Signup(firebaseApp, email, password){
+	console.log('hello')
+	firebaseApp.auth().createUserWithEmailAndPassword(email, password)
+		.then((userCredential) => {
+			var user = userCredential.user;
+			console.log(user)
+		})
+		.catch((error) => {
+			console.error(error.code + " : " + error.message);
+		})
+}
+
+
+
 function Header({user, firebaseApp}) {
 	const [loginOpen, setLoginOpen] = useState(false);
+	const [signup, setSignup] = useState(false);
+	let email, password;
 
   return (
     <div className="header">
@@ -69,24 +86,63 @@ function Header({user, firebaseApp}) {
 			}
         </div>
 
+		{/* POPUP de connexion */}
 		<Dialog
 			open={loginOpen}
+			fullWidth={true}
+			maxWidth={'xs'}
 			TransitionComponent={fromTopTransition}
 			keepMounted
 			onClose={() => setLoginOpen(false)}
 			aria-labelledby="login-dialog-title"
 			aria-describedby="login-dialog-description"
 		>
-			<DialogTitle id="login-dialog-title">Connexion</DialogTitle>
-			<DialogContent>
-				{/* <DialogContentText id="login-dialog-description">
-					Hello connecte toi merde !
-				</DialogContentText> */}
-				<SignWithGoogleButton firebaseApp={firebaseApp} setLoginOpen={setLoginOpen} />
-			</DialogContent>
-			<DialogActions>
+			{!signup &&
+			<>
+				<DialogTitle id="login-dialog-title">Connexion</DialogTitle>
+				<DialogContent>
+					{/* <DialogContentText id="login-dialog-description">
+						Hello connecte toi merde !
+					</DialogContentText> */}
+					<form className="signin-form" autoComplete="off">
+						<TextField label="Email" id="email" name="email" type="email"/>
+						<TextField label="Mot de passe" id="password" name="password" type="password"/>
+						<div className="submit-btn">
+							<Button text="Se connecter" theme={'green-mtn'} outlined={true}>TEST</Button>
+							<a onClick={() => setSignup(true)}>S'inscrire</a>
+						</div>
+					</form>
+					<SignWithGoogleButton firebaseApp={firebaseApp} setLoginOpen={setLoginOpen} style={{marginBottom: '1em'}} />
+				</DialogContent>
+			</>
+			}
+			{signup &&
+			<>
+				<DialogTitle id="login-dialog-title">Connexion</DialogTitle>
+				<DialogContent>
+				<form className="signin-form">
+					<Grid style={{display: "flex"}}>
+						<Grid item md={6}>
+							<TextField label="Nom" id="name" name="name" type="text"/>
+						</Grid>
+						<Grid item md={6}>
+							<TextField label="Prénom" id="firstname" name="firstname" type="text"/>
+						</Grid>
+					</Grid>
+					<TextField label="Email" id="email" name="email" type="email" value={email} style={{marginBottom: '1em'}} />
+					<TextField label="Mot de passe" id="password" name="password" type="password" value={password} />
+					<TextField label="Confirmez le mot de passe" id="password" name="password" type="password" />
+					<div className="submit-btn">
+						<Button text="Valider" theme={'green-mtn'} outlined={true} onClick={()=>console.log('hello')}></Button>
+						<a onClick={()=>setSignup(false)}>Se connecter</a>
+					</div>
+				</form>
+				</DialogContent>
+			</>
+			}
+			{/* <DialogActions>
 				<Button theme={'error'} outlined={true} onClick={() => setLoginOpen(false)} text={'ANNULER'}></Button>
-			</DialogActions>
+			</DialogActions> */}
 		</Dialog>
     </div>
   );
