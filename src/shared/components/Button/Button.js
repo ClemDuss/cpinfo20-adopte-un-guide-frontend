@@ -11,6 +11,7 @@ export default function Button({text, theme, outlined}){
                 ${theme == 'green-mtn' ? ' button-green-mtn' : ''}
                 ${outlined ? ' outlined' : ''}`
             }
+
         >
             {text}
         </div>
