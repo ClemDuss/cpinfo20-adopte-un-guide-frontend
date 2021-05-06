@@ -70,7 +70,9 @@ function Header({user, firebaseApp}) {
 					<img src={user.picture} className="circle" />
 				</div>
 				<div class="user-options">
-					<div>Paramètres</div>
+					<Link to={`users`}>
+						<div>Paramètres</div>
+					</Link>
 					<div className="mail-box">Messagerie</div>
 					<div onClick={() => firebaseApp.auth().signOut()}>Déconnexion</div>
 				</div>
