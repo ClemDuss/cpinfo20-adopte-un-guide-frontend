@@ -1,26 +1,36 @@
 .container {
-    width: 100;
-    border: solid 1px;
+    width: 100%;
+    border: solid 2px;
     border-radius: 5px;
     margin: 5px;
     padding: 2px;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
-.guide-name {
+.overview-user-name {
     width: 15%;
 }
 
-.guide-sex {
+.overview-user-gender {
     font-weight: bold;
 }
 
-.guide-infos {
+.overview-user-infos {
     display: inline-block;
     font-style: italic;
     width: 15%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: gray;
+}
+
+.overview-user-photo {
+    width: 5%
+}
+
+.photo {
+    width: 100%
 }

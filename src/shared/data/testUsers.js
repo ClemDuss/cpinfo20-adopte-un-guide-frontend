@@ -2,62 +2,68 @@ const testUsers = [
     {
         id: "1",
         phone: "0102030405", 
-        firstname: "donatien", 
-        lastname: "kanbodge",
+        firstname: "Donatien", 
+        lastname: "Kanbodge",
         birthday: "12/12/2012",
-        sex: "m",
-        infos: "blabla tout ça c'est du blabla pour remplir",
-        guide: "n"
+        gender: "h",
+        infos: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        guide: "n",
+        role: 1
     },
     {
         id: "2",
         phone: "0102030405", 
-        firstname: "mireille", 
-        lastname: "durlu",
+        firstname: "Mireille", 
+        lastname: "Labeille",
         birthday: "12/12/2012",
-        sex: "f",
+        gender: "f",
         infos: "blabla tout ça c'est du blabla pour remplir",
-        guide: "n"
+        guide: "n",
+        role: 1
     },
     {
         id: "3",
         phone: "0102030405", 
-        firstname: "bobby", 
-        lastname: "lapointe",
+        firstname: "Bobby", 
+        lastname: "Lapointe",
         birthday: "12/12/2012",
-        sex: "m",
+        gender: "h",
         infos: "blabla tout ça c'est du blabla pour remplir",
-        guide: "n"
+        guide: "n",
+        role: 1
     },
     {
         id: "4",
         phone: "0102030405", 
-        firstname: "megan", 
-        lastname: "duturfu",
+        firstname: "Megan", 
+        lastname: "Duturfu",
         birthday: "12/12/2012",
-        sex: "f",
+        gender: "f",
         infos: "blabla tout ça c'est du blabla pour remplir",
-        guide: "y"
+        guide: "y",
+        role: 2
     },
     {
         id: "5",
         phone: "0102030405", 
-        firstname: "bobby", 
-        lastname: "lapointe",
+        firstname: "Gerard", 
+        lastname: "Menvussa",
         birthday: "12/12/2012",
-        sex: "m",
+        gender: "h",
         infos: "blabla tout ça c'est du blabla pour remplir",
-        guide: "n"
+        guide: "n",
+        role: 1
     },
     {
         id: "6",
         phone: "0102030405", 
-        firstname: "bobby", 
-        lastname: "lapointe",
+        firstname: "Alain", 
+        lastname: "Proviste",
         birthday: "12/12/2012",
-        sex: "m",
+        gender: "h",
         infos: "blabla tout ça c'est du blabla pour remplir",
-        guide: "n"
+        guide: "n",
+        role: 1
     },
 ]
 

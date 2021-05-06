@@ -17,7 +17,8 @@ function AccountManagement() {
                             lastname={testUser.lastname}
                             guide={testUser.guide}
                             infos={testUser.infos}
-                            sex={testUser.sex}
+                            gender={testUser.gender}
+                            role={testUser.role}
                         />
                     )}
                 </Grid>
