@@ -1,40 +1,25 @@
 import { Container, Grid } from '@material-ui/core';
 import React, {useState, useCallback} from 'react';
 import {Route, useParams} from 'react-router-dom';
-import './Hike.css';
-// import  { GoogleMap, useJsApiLoader, InfoWindow, Marker } from '@react-google-maps/api';
-import ReactMapGL, {Marker, Popup} from 'react-map-gl';
+import './Hike.css'; //import du css associé
+import ReactMapGL, {Marker, Popup} from 'react-map-gl'; //composants MapBox
 
-import {dispDifficulty} from '../../shared/services/functions';
+import {dispDifficulty, getHikeById} from '../../shared/services/functions';
 
-//data
-import allHikes from './../../shared/data/allHikes';
-
-import landscape from './../../assets/img/1.jpg';
+import landscape from './../../assets/img/1.jpg'; //import dde l'image défault des randos
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHiking, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHiking, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'; //icons FontAwesome
 
-function getHike(id){
-    let theHike = null;
-
-    allHikes.forEach(someHike => {
-        if(someHike.hikeId == id){
-            theHike = someHike;
-        }
-    });
-
-    return theHike;
-}
-
-// Initialize and add the map
-// https://developers.google.com/maps/documentation/javascript/adding-a-google-map?hl=fr#maps_add_map-javascript
-
+/**
+ * Composant permettant l'affichage des détails d'un itinéraire demandé
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Hike(){
-    const { hikeId } = useParams();
-    const theHike = getHike(hikeId);
-    
-    const [selectedMarker, setSelectedMarker] = useState(null);
+    const { hikeId } = useParams(); //id de la rando sélectionnée
+    const theHike = getHikeById(hikeId); //la rando sélectionnée
 
+    //Définition du positionnement de base de la map
     const [viewport, setViewport] = useState({
        latitude: (theHike.location.start.lat + theHike.location.finish.lat) / 2,
        longitude: (theHike.location.start.lng + theHike.location.finish.lng) / 2,
@@ -43,37 +28,24 @@ function Hike(){
        zoom: 12
     });
 
-    const IMGPATH = '/img/';
+    const [selectedMarker, setSelectedMarker] = useState(null); //pour mémoriser le marqueur sélectionné
 
-    // const {mapIsLoaded} = useJsApiLoader({
-    //     id: 'google-map-script',
-    //     googleMapsApiKey: "AIzaSyAxq5nwrgFm-Ot5kLJ4Ithn5XMwb68TaLM"
-    // });
-
-    const [map, setMap] = useState(null)
-
-    const mapOnLoad = useCallback(function callback(map){
-        const bounds = new window.google.maps.LatLngBounds();
-        map.fitBounds(bounds);
-        setMap(map)
-    }, []);
-
-    const mapOnUnmount = useCallback(function callback(map){
-        setMap(null)
-    }, [])
+    const IMGPATH = '/img/'; //emplacement des images de l'application
 
     return(
         <div className="hike-details">
             <Container maxWidth="lg">
-                {theHike != null &&
+                {theHike ?
+                    //Si la rando existe
                     <div className="hike-details-content">
                         <Grid className="hike-details-content-grid">
                             <Grid item lg={6} md={6} sm={12} xs={12} className="hike-pictures">
                                 {/* <img src={`/assets/img/${theHike.pictures[0]}`} /> */}
-                                {theHike.pictures[0] != undefined &&
+                                {theHike.pictures[0] !== undefined &&
                                     <img src={IMGPATH + theHike.pictures[0]} />
                                 }
-                                {theHike.pictures[0] == undefined &&
+                                {theHike.pictures[0] === undefined &&
+                                    //si aucune photo n'est renseignée, on affiche l'image par défaut
                                     <img src={landscape} />
                                 }
                             </Grid>
@@ -107,6 +79,7 @@ function Hike(){
                                     setViewport(viewport);
                                 }}
                             >
+                                {/*Ajout des marqueurs de départ et d'arrivée de la Rando*/}
                                 <Marker
                                     key={theHike.hikeId}
                                     latitude={theHike.location.start.lat}
@@ -132,6 +105,7 @@ function Hike(){
                                     </button>
                                 </Marker>
                                 {selectedMarker &&
+                                    //Affichage du détail du markeur
                                     <Popup
                                         latitude={selectedMarker.lat}
                                         longitude={selectedMarker.lng}
@@ -143,8 +117,8 @@ function Hike(){
                             </ReactMapGL>
                         </div>
                     </div>
-                }
-                {theHike == null &&
+                :
+                    //si aucune rando n'a été trouvée selon l'ID
                     <Route render={() => <h1 style={{paddingTop: '3.5em'}}>404: page introuvable</h1>} />
                 }
             </Container>

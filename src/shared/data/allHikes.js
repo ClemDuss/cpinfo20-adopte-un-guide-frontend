@@ -66,7 +66,7 @@ const allHikes = [
         title: "La Jonction",
         location:{
             start: {
-                name: "Bossons",
+                name: "Les Bossons",
                 lat: 45.89915086325382,
                 lng: 6.84469133240456
             },

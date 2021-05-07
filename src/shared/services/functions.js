@@ -1,5 +1,6 @@
 import React from 'react';
 import {Terrain, TerrainOutlined} from '@material-ui/icons';
+import allHikes from "../data/allHikes";
 
 /**
  * Va rnevoyer les 5 icons de difficulté pour matérialiser le chiffre renseigné
@@ -14,4 +15,21 @@ export function dispDifficulty(difficulty){
     }
 
     return items;
+}
+
+/**
+ * Retourne la rando/itinéraire selon son ID
+ * @param hikeId    id de la rando à trouver
+ * @returns {null}  rando correspondante
+ */
+export function getHikeById(hikeId){
+    let theHike = null;
+
+    allHikes.forEach(someHike => {
+        if(someHike.hikeId == hikeId){
+            theHike = someHike;
+        }
+    });
+
+    return theHike;
 }
