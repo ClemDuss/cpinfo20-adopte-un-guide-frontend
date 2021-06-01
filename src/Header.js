@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './Header.css';
 import logo from './logo.svg';
+import userIcon from './assets/img/user.svg';
 import SignWithGoogleButton from './shared/components/SignWithGoogleButton/SignWithGoogleButton';
-import Button from './shared/components/Button/Button';
+// import Button from './shared/components/Button/Button';
 
 import {Link} from 'react-router-dom';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, TextField, Grid } from '@material-ui/core';
+import { Dialog, DialogContent, DialogTitle, Slide, TextField, Grid } from '@material-ui/core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-import firebase from 'firebase';
 
-const provider = new firebase.auth.GoogleAuthProvider();
+let myFirebaseApp;
+let db;
 
 //transition permettant l'arrivée de la Dialog par le haut
 const fromTopTransition = React.forwardRef(function fromTopTransition(props, ref){
@@ -19,24 +20,29 @@ const fromTopTransition = React.forwardRef(function fromTopTransition(props, ref
 });
 
 /**
- * Agit au changement de la valeur du champ input de recherche
- * @param {String} value Valeur du champ input
+ * Permet l'inscription d'un nouvel utilisateur
+ * @param {firebase} firebaseApp	Permet la connexion avec firebase
+ * @param {String} email			Email renseigné
+ * @param {String} password			Mot de passe renseigné
+ * @param {String} lastname			Nom de famille renseigné
+ * @param {String} firstname		Prénom renseigné
+ * @param {function} setLoginOpen	Fonction d'actualisation de l'ouverture de la popup login
  */
-function onChangeSearch(value){
-	if(value.length > 0){
-		document.getElementById('search-button').style.display = 'block';
-	}else{
-		document.getElementById('search-button').style.display = 'none';
-	}
-}
-
-
-function Signup(firebaseApp, email, password){
-	console.log('hello')
+function Signup(firebaseApp, email, password, lastname, firstname, {setLoginOpen}){
 	firebaseApp.auth().createUserWithEmailAndPassword(email, password)
 		.then((userCredential) => {
-			var user = userCredential.user;
-			console.log(user)
+			let user = userCredential.user;
+			return db.collection('users').doc(user.uid).set({
+				uid: user.uid,
+				email: email,
+				lastname: lastname,
+				firstname: firstname,
+				role: 1
+			});
+		})
+		.then(()=>{
+			//callback user bien ajouté
+			setLoginOpen(false);
 		})
 		.catch((error) => {
 			console.error(error.code + " : " + error.message);
@@ -44,11 +50,45 @@ function Signup(firebaseApp, email, password){
 }
 
 
+/**
+ * Permet l'authentification d'un utilisateur via le mail et le mdp
+ * @param {firebase} firebaseApp	Permet la connexion avec firebase
+ * @param {String} email			Email renseigné
+ * @param {String} password			Mot de passe renseigné
+ * @param {function} setLoginOpen	Fonction d'actualisation de l'ouverture de la popup login
+ */
+function Signin(firebaseApp, email, password, {setLoginOpen}){
+	firebaseApp.auth().signInWithEmailAndPassword(email, password)
+		.then((userCredential) =>{
+			let user = userCredential.user;
+			setLoginOpen(false);
+		})
+		.catch((error)=>{
+			console.log(error.code + " | " + error.message);
+		});
+}
+
+
 
 function Header({user, firebaseApp}) {
 	const [loginOpen, setLoginOpen] = useState(false);
 	const [signup, setSignup] = useState(false);
-	let email, password;
+	const [email, setEmail] = useState("")
+	const [password, setPassword] = useState("")
+	const [firstname, setFirstname] = useState("")
+	const [lastname, setLastname] = useState("")
+
+	myFirebaseApp = firebaseApp;
+	db = myFirebaseApp.firestore();
+
+	useEffect(()=>{
+		if(!loginOpen) {
+			setEmail("");
+			setPassword("");
+			setFirstname("");
+			setLastname("");
+		}
+	})
 
   return (
     <div className="header">
@@ -56,35 +96,39 @@ function Header({user, firebaseApp}) {
             <img src={logo} alt={'logo'} className="header-logo" />
             <div className="header-title">Adopte un Guide</div>
         </Link>
-        <div className="right-elements">
-			<div className="search-bar">
-				<input placeholder="Rechercher" onChange={(event)=>onChangeSearch(event.target.value)} />
-				<button id="search-button" className="search-button" title="Rechercher"><FontAwesomeIcon icon={faSearch} /></button>
-			</div>
-			{user &&
+
+		{/*INFOS Utilisateur haut droit*/}
+		{user ?
+			<div className={"right-elements"}>
+				{user.role > 1 &&
+					<button className={"new-hike-btn button button-white outlined"}>
+						<FontAwesomeIcon icon={faPlus}/> Nouvel itinéraire
+					</button>
+				}
 				<div className="user-settings">
-				<div className="user-info">
-					<span className="user-name">
-						{user.displayName}
-					</span>
-					<img src={user.picture} className="circle" />
+					<div className="user-info">
+						<span className="user-name">
+							{user.displayName || user.firstname + " " + user.lastname}
+						</span>
+						<img alt={"user"} src={user.picture || userIcon} className="circle" />
+					</div>
+					<div className="user-options">
+						<div>Paramètres</div>
+						<div className="mail-box">Messagerie</div>
+						<div onClick={() => firebaseApp.auth().signOut()}>Déconnexion</div>
+					</div>
 				</div>
-				<div class="user-options">
-					<div>Paramètres</div>
-					<div className="mail-box">Messagerie</div>
-					<div onClick={() => firebaseApp.auth().signOut()}>Déconnexion</div>
-				</div>
-				</div>
-			}
-			{!user &&
-				// <div className="user-settings" onClick={() => firebaseApp.auth().signInWithPopup(provider)}>
+			</div>
+		:
+			// <div className="user-settings" onClick={() => firebaseApp.auth().signInWithPopup(provider)}>
+			<div className="right-elements">
 				<div className="user-settings" onClick={() => setLoginOpen(true)}>
 					<div className="login-button">
 						Connexion
 					</div>
 				</div>
-			}
-        </div>
+			</div>
+		}
 
 		{/* POPUP de connexion */}
 		<Dialog
@@ -97,7 +141,7 @@ function Header({user, firebaseApp}) {
 			aria-labelledby="login-dialog-title"
 			aria-describedby="login-dialog-description"
 		>
-			{!signup &&
+			{!signup ?
 			<>
 				<DialogTitle id="login-dialog-title">Connexion</DialogTitle>
 				<DialogContent>
@@ -105,35 +149,71 @@ function Header({user, firebaseApp}) {
 						Hello connecte toi merde !
 					</DialogContentText> */}
 					<form className="signin-form" autoComplete="off">
-						<TextField label="Email" id="email" name="email" type="email"/>
-						<TextField label="Mot de passe" id="password" name="password" type="password"/>
+						<TextField
+							label="Email" id="email" name="email" type="email"
+							value={email}
+							onChange={(e)=>setEmail(e.target.value)}
+						/>
+						<TextField
+							label="Mot de passe" id="password" name="password" type="password"
+							value={password}
+							onChange={(e)=>setPassword(e.target.value)}
+						/>
 						<div className="submit-btn">
-							<Button text="Se connecter" theme={'green-mtn'} outlined={true}>TEST</Button>
+							{/*<Button text="Se connecter" theme={'green-mtn'} outlined={true}>TEST</Button>*/}
+							<button
+								type={"submit"}
+								className={"button button-green-mtn outlined"}
+								onClick={(e)=>{e.preventDefault(); Signin(firebaseApp, email, password, {setLoginOpen})}}
+							>Se connecter</button>
 							<a onClick={() => setSignup(true)}>S'inscrire</a>
 						</div>
 					</form>
 					<SignWithGoogleButton firebaseApp={firebaseApp} setLoginOpen={setLoginOpen} style={{marginBottom: '1em'}} />
 				</DialogContent>
 			</>
-			}
-			{signup &&
+			:
 			<>
-				<DialogTitle id="login-dialog-title">Connexion</DialogTitle>
+				<DialogTitle id="login-dialog-title">Inscription</DialogTitle>
 				<DialogContent>
 				<form className="signin-form">
 					<Grid style={{display: "flex"}}>
 						<Grid item md={6}>
-							<TextField label="Nom" id="name" name="name" type="text"/>
+							<TextField
+								label="Nom" id="name" name="name" type="text"
+								value={lastname}
+								onChange={(e)=>setLastname(e.target.value)}
+							/>
 						</Grid>
 						<Grid item md={6}>
-							<TextField label="Prénom" id="firstname" name="firstname" type="text"/>
+							<TextField
+								label="Prénom" id="firstname" name="firstname" type="text"
+								value={firstname}
+							   	onChange={(e)=>setFirstname(e.target.value)}
+							/>
 						</Grid>
 					</Grid>
-					<TextField label="Email" id="email" name="email" type="email" value={email} style={{marginBottom: '1em'}} />
-					<TextField label="Mot de passe" id="password" name="password" type="password" value={password} />
-					<TextField label="Confirmez le mot de passe" id="password" name="password" type="password" />
+					<TextField
+						label="Email" id="email" name="email" type="email"
+						value={email}
+						onChange={(e)=>setEmail(e.target.value)}
+						style={{marginBottom: '1em'}}
+					/>
+					<TextField
+						label="Mot de passe" id="password" name="password" type="password"
+						value={password}
+						onChange={(e)=>setPassword(e.target.value)}
+					/>
+					<TextField
+						label="Confirmez le mot de passe" id="password" name="password" type="password"
+						value={password}
+					/>
 					<div className="submit-btn">
-						<Button text="Valider" theme={'green-mtn'} outlined={true} onClick={()=>console.log('hello')}></Button>
+						{/*<Button text="Valider" theme={'green-mtn'} outlined={true} onClick={()=>console.log('hello')}></Button>*/}
+						<button
+							className={"button button-green-mtn outlined"}
+							onClick={()=>Signup(firebaseApp, email, password, lastname, firstname, {setLoginOpen})}
+						>Valider</button>
 						<a onClick={()=>setSignup(false)}>Se connecter</a>
 					</div>
 				</form>

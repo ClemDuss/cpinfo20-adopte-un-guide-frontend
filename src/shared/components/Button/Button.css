@@ -1,5 +1,7 @@
 .button{
     color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
     padding: 0.5em 1em;
     margin: 0.3em;
     border-radius: 0.3em;
@@ -95,4 +97,26 @@
 .button.button-green-mtn.outlined:hover{
     border-color: var(--green-mountain-hover);
     color: var(--green-mountain-hover);
+}
+
+
+/* WHITE */
+.button.button-white{
+    background-color: var(--light-grey);
+}
+
+.button.button-white:hover{
+    background-color: var(--light-grey);
+}
+
+.button.button-white.outlined{
+    border: 0.1em solid var(--light-grey);
+    background-color: unset;
+    color: var(--light-grey);
+}
+
+.button.button-white.outlined:hover{
+    border-color: var(--light-grey);
+    color: var(--white);
+    background-color: rgba(220, 220, 220, 0.3);
 }

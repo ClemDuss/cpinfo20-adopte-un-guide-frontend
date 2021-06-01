@@ -1,4 +1,5 @@
 import './App.css';
+import './shared/components/Button/Button.css';
 
 import Header from './Header';
 import Footer from './shared/components/Footer/Footer';
@@ -20,12 +21,17 @@ function App() {
       if (newUser){
         //si les infos de l'utilisateur qui s'est connecté sont bien renvoyées
         //on les attribue à notre var 'user'
-        setUser({
-          uid: newUser.uid,
-          displayName: newUser.displayName,
-          email: newUser.email,
-          picture: newUser.photoURL
-        });
+        firebaseApp.firestore().collection('users').doc(newUser.uid).get()
+          .then((doc)=>{
+            if(doc.exists){
+              setUser(doc.data());
+            }else{
+              console.log("Informations de l'utilisateur introuvables");
+            }
+          }).catch((error)=>{
+            console.log(error.code + " | " + error.message);
+          });
+
         
         return;
       }
@@ -39,7 +45,7 @@ function App() {
     <Router className="page">
       <Header user={user} firebaseApp={firebaseApp} />
       <Switch>
-        <Route path="/" exact component={Home}></Route>
+        <Route path="/" exact component={Home}/>
         <Route path="/randos/:hikeId" component={Hike} />
         <Route render={() => <h1 style={{paddingTop: '3.5em'}}>404: page introuvable</h1>} />
       </Switch>
