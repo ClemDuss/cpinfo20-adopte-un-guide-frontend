@@ -50,3 +50,7 @@ code {
 .circle{
   border-radius: 50%;
 }
+
+body a{
+  text-decoration: none;
+}

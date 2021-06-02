@@ -10,6 +10,8 @@ import { Dialog, DialogContent, DialogTitle, Slide, TextField, Grid } from '@mat
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
+//décommenter la ligne suivante pour l'intelisence lors du DEV mais n'est pas nécessaire au bon fonctionnement
+// import firebase from 'firebase';
 
 let myFirebaseApp;
 let db;
@@ -60,7 +62,7 @@ function Signup(firebaseApp, email, password, lastname, firstname, {setLoginOpen
 function Signin(firebaseApp, email, password, {setLoginOpen}){
 	firebaseApp.auth().signInWithEmailAndPassword(email, password)
 		.then((userCredential) =>{
-			let user = userCredential.user;
+			// let user = userCredential.user;
 			setLoginOpen(false);
 		})
 		.catch((error)=>{
@@ -88,7 +90,7 @@ function Header({user, firebaseApp}) {
 			setFirstname("");
 			setLastname("");
 		}
-	})
+	}, [loginOpen])
 
   return (
     <div className="header">
@@ -101,9 +103,11 @@ function Header({user, firebaseApp}) {
 		{user ?
 			<div className={"right-elements"}>
 				{user.role > 1 &&
-					<button className={"new-hike-btn button button-white outlined"}>
-						<FontAwesomeIcon icon={faPlus}/> Nouvel itinéraire
-					</button>
+					<Link to={"/nouvelle-rando"} style={{display: "flex", alignItems: "center", textDecoration: "none"}}>
+						<button className={"new-hike-btn button button-white outlined"}>
+							<FontAwesomeIcon icon={faPlus}/> Nouvel itinéraire
+						</button>
+					</Link>
 				}
 				<div className="user-settings">
 					<div className="user-info">
@@ -166,7 +170,7 @@ function Header({user, firebaseApp}) {
 								className={"button button-green-mtn outlined"}
 								onClick={(e)=>{e.preventDefault(); Signin(firebaseApp, email, password, {setLoginOpen})}}
 							>Se connecter</button>
-							<a onClick={() => setSignup(true)}>S'inscrire</a>
+							<a href="/" onClick={(e) => {e.preventDefault(); setSignup(true)}}>S'inscrire</a>
 						</div>
 					</form>
 					<SignWithGoogleButton firebaseApp={firebaseApp} setLoginOpen={setLoginOpen} style={{marginBottom: '1em'}} />
@@ -214,7 +218,7 @@ function Header({user, firebaseApp}) {
 							className={"button button-green-mtn outlined"}
 							onClick={()=>Signup(firebaseApp, email, password, lastname, firstname, {setLoginOpen})}
 						>Valider</button>
-						<a onClick={()=>setSignup(false)}>Se connecter</a>
+						<a href="/" onClick={(e) => {e.preventDefault(); setSignup(false)}}>Se connecter</a>
 					</div>
 				</form>
 				</DialogContent>

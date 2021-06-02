@@ -1,8 +1,5 @@
 import './Home.css';
 import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Card from './../../shared/components/Card/Card';
 

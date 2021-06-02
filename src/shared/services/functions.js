@@ -26,7 +26,7 @@ export function getHikeById(hikeId){
     let theHike = null;
 
     allHikes.forEach(someHike => {
-        if(someHike.hikeId == hikeId){
+        if(someHike.hikeId === hikeId){
             theHike = someHike;
         }
     });

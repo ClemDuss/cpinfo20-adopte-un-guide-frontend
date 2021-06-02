@@ -11,14 +11,6 @@ import { Link } from 'react-router-dom';
 class Card extends React.Component {
     render(){
         /**
-         * Fonction au click sur une "Card" randonnée
-         * @param {int} hikeId Id de la course clickée
-         */
-        function openHikeDetails(hikeId){
-            // alert("rando n°" + hikeId);
-        }
-
-        /**
          * Va rnevoyer les 5 icons de difficulté pour matérialiser le chiffre renseigné
          * @param {int} difficulty Niveau de difficulté sur 5
          */
@@ -66,11 +58,11 @@ class Card extends React.Component {
                     {/* <div className="card-inner" onClick={() => openHikeDetails(this.props.hikeId)}> */}
                         <div className="card-header">
                             <div className="hike-picture">
-                                { this.props.mainPicture != undefined &&
+                                { this.props.mainPicture !== undefined &&
                                     <div className="hike-main-picture" style={{backgroundImage: `url(/img/${this.props.mainPicture})`}}></div>
                                     // <img src={`/img/${this.props.mainPicture}`} alt={this.props.title ?? "Photo de la rando"}/>
                                 }
-                                { this.props.mainPicture == undefined &&
+                                { this.props.mainPicture === undefined &&
                                     <img src={landscape} alt={this.props.title ?? "Photo de la rando"} style={{width: '100%', borderRadius: '0.5em 0.5em 0 0'}} />
                                 }
                             </div>

@@ -1,5 +1,5 @@
 import { Container, Grid } from '@material-ui/core';
-import React, {useState, useCallback} from 'react';
+import React, {useState} from 'react';
 import {Route, useParams} from 'react-router-dom';
 import './Hike.css'; //import du css associé
 import ReactMapGL, {Marker, Popup} from 'react-map-gl'; //composants MapBox
@@ -42,11 +42,11 @@ function Hike(){
                             <Grid item lg={6} md={6} sm={12} xs={12} className="hike-pictures">
                                 {/* <img src={`/assets/img/${theHike.pictures[0]}`} /> */}
                                 {theHike.pictures[0] !== undefined &&
-                                    <img src={IMGPATH + theHike.pictures[0]} />
+                                    <img alt={"Couverture"} src={IMGPATH + theHike.pictures[0]} />
                                 }
                                 {theHike.pictures[0] === undefined &&
                                     //si aucune photo n'est renseignée, on affiche l'image par défaut
-                                    <img src={landscape} />
+                                    <img alt={"Couv Defaut"} src={landscape} />
                                 }
                             </Grid>
                             <Grid item lg={6} md={6} sm={12} xs={12} className="hike-infos">
@@ -89,7 +89,7 @@ function Hike(){
                                         e.preventDefault();
                                         setSelectedMarker(theHike.location.start)
                                     }}>
-                                        <img src="/img/icons/hiking-solid.svg" />
+                                        <img alt={"Départ"} src="/img/icons/hiking-solid.svg" />
                                     </button>
                                 </Marker>
                                 <Marker
@@ -101,7 +101,7 @@ function Hike(){
                                         e.preventDefault();
                                         setSelectedMarker(theHike.location.finish)
                                     }}>
-                                        <img src="/img/icons/mountain-solid.svg" />
+                                        <img alt={"Sommet"} src="/img/icons/mountain-solid.svg" />
                                     </button>
                                 </Marker>
                                 {selectedMarker &&
