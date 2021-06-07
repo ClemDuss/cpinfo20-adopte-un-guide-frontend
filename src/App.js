@@ -48,7 +48,12 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home}/>
         <Route path="/randos/:hikeId" component={Hike} />
-        <Route path="/nouvelle-rando" component={NewHike} msg={"hello"} />
+          <Route path="/nouvelle-rando">
+              <NewHike
+                firebaseApp={firebaseApp}
+                user={user}
+              />
+          </Route>
         <Route render={() => <h1 style={{paddingTop: '3.5em'}}>404: page introuvable</h1>} />
       </Switch>
       <Footer />

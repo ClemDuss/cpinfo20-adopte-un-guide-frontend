@@ -6,7 +6,7 @@ import ReactMapGL, {Marker, Popup} from 'react-map-gl'; //composants MapBox
 
 import {dispDifficulty, getHikeById} from '../../shared/services/functions';
 
-import landscape from './../../assets/img/1.jpg'; //import dde l'image défault des randos
+import landscape from './../../assets/img/1.jpg'; //import de l'image défault des randos
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHiking, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'; //icons FontAwesome
 
@@ -69,7 +69,7 @@ function Hike(){
                         </Grid>
                         {/* Petit tuto sur l'ajout de la map mapbox via React*/}
                         {/* https://www.youtube.com/watch?v=JJatzkPcmoI*/}
-                        <div item lg={12} md={12} sm={12} xs={12} id={'map'}>
+                        <div id={'map'}>
                             <ReactMapGL
                                 {...viewport}
                                 mapStyle={'mapbox://styles/clemduss/ckobemc2g10xh18nqwg3dz42p'}

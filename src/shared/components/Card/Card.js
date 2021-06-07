@@ -52,7 +52,7 @@ class Card extends React.Component {
         }
 
         return (
-            <Grid key={this.props.key} item lg={3} md={4} sm={6} xs={12} className="card">
+            <Grid item lg={3} md={4} sm={6} xs={12} className="card">
                 <Link to={`randos/${this.props.hikeId}`} className="card-link">
                     <div className="card-inner">
                     {/* <div className="card-inner" onClick={() => openHikeDetails(this.props.hikeId)}> */}
