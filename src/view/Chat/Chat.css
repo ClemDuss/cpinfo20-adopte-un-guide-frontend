@@ -1,0 +1,10 @@
+.chat {
+    width: 100%;
+}
+
+.chat-button {
+    position: relative;
+    width: 100px;
+    margin-right: 100px;
+    right: 0;
+}
