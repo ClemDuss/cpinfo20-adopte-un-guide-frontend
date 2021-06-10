@@ -69,7 +69,7 @@ function Header({user, firebaseApp}) {
 					</span>
 					<img src={user.picture} className="circle" />
 				</div>
-				<div class="user-options">
+				<div className="user-options">
 					<Link to={`users`}>
 						<div>Paramètres</div>
 					</Link>

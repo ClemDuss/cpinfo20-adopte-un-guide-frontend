@@ -65,6 +65,61 @@ const testUsers = [
         guide: "n",
         role: 1
     },
+    {
+        id: "7",
+        phone: "0102030405", 
+        firstname: "Marlène", 
+        lastname: "Sasseur",
+        birthday: "12/12/2012",
+        gender: "f",
+        infos: "blabla tout ça c'est du blabla pour remplir",
+        guide: "n",
+        role: 1
+    },
+    {
+        id: "8",
+        phone: "0102030405", 
+        firstname: "Richard", 
+        lastname: "Dassaud",
+        birthday: "12/12/2012",
+        gender: "h",
+        infos: "blabla tout ça c'est du blabla pour remplir",
+        guide: "n",
+        role: 1
+    },
+    {
+        id: "9",
+        phone: "0102030405", 
+        firstname: "Thierry", 
+        lastname: "Raldernier",
+        birthday: "12/12/2012",
+        gender: "h",
+        infos: "blabla tout ça c'est du blabla pour remplir",
+        guide: "n",
+        role: 1
+    },
+    {
+        id: "10",
+        phone: "0102030405", 
+        firstname: "Melissa", 
+        lastname: "Arcofage",
+        birthday: "12/12/2012",
+        gender: "f",
+        infos: "blabla tout ça c'est du blabla pour remplir",
+        guide: "n",
+        role: 1
+    },
+    {
+        id: "11",
+        phone: "0102030405", 
+        firstname: "Didier", 
+        lastname: "Téticien",
+        birthday: "12/12/2012",
+        gender: "h",
+        infos: "blabla tout ça c'est du blabla pour remplir",
+        guide: "n",
+        role: 1
+    },
 ]
 
 export default testUsers;
