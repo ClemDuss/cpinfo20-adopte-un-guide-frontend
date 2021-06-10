@@ -1,3 +1,21 @@
+# Soutenance
+## Technique
+1. Git Good
+2. Demo live et courte (pas 15 min quoi)
+3. Architecture du site à présenter dans le PPT (firebase, firestore tout ça) avec un diagramme et des flèches avec [Miro](https://miro.com/) ou [Diagrams.net](https://app.diagrams.net/)
+4. Site déployé dans le cloud
+5. quels services de Cloud avons nous utilisé
+6. Quels sont les problématiques et fonctionnalités gérées avec le cloud
+7. parler de la BDD noSQL avantages / inconvénients
+8. ques sont les avantages à utiiser React ou désavantages
+9. Combien ça coûte notre site web chaque mois (prix des requête et hébergement)
+10. organisation du projet
+11. comment on a déployé le site web
+12. où est stocké le code source
+13. quels tests avons-nous fait (automatisé)
+14. ques ont été es problématiques pendant le cours, là où on a été bloqué
+15. /!\ Si on peut faire à nouveau ce projet, qu'est-ce qu'on pourrais faire différemment
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +86,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+

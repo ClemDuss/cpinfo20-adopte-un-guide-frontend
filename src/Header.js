@@ -40,6 +40,8 @@ function Signup(firebaseApp, email, password, lastname, firstname, {setLoginOpen
 				lastname: lastname,
 				firstname: firstname,
 				role: 1
+			}).catch((e)=>{
+				console.log(e.code + " | " + e.message)
 			});
 		})
 		.then(()=>{
@@ -216,7 +218,7 @@ function Header({user, firebaseApp}) {
 						{/*<Button text="Valider" theme={'green-mtn'} outlined={true} onClick={()=>console.log('hello')}></Button>*/}
 						<button
 							className={"button button-green-mtn outlined"}
-							onClick={()=>Signup(firebaseApp, email, password, lastname, firstname, {setLoginOpen})}
+							onClick={(e)=>{e.preventDefault(); Signup(firebaseApp, email, password, lastname, firstname, {setLoginOpen})}}
 						>Valider</button>
 						<a href="/" onClick={(e) => {e.preventDefault(); setSignup(false)}}>Se connecter</a>
 					</div>

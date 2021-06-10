@@ -46,11 +46,12 @@ function App() {
     <Router className="page">
       <Header user={user} firebaseApp={firebaseApp} />
       <Switch>
-        <Route path="/" exact component={Home}/>
+        <Route path="/" exact>
+          <Home firebaseApp={firebaseApp}/>
+        </Route>
         <Route path="/randos/:hikeId" component={Hike} />
           <Route path="/nouvelle-rando">
               <NewHike
-                firebaseApp={firebaseApp}
                 user={user}
               />
           </Route>
