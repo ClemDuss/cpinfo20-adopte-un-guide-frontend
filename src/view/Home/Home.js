@@ -3,31 +3,44 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Card from './../../shared/components/Card/Card';
 
-import allHikes from './../../shared/data/allHikes';
+// import allHikes from './../../shared/data/allHikes';
+import { getAllHikes } from '../../shared/services/functions';
+import {useEffect, useState} from 'react';
+import Loader from "../Loader/Loader";
 
 
 function Home() {
-  return (
-    <div key={'home'} className="home">
-        <Container maxWidth="lg">
-            <Grid container className="home-content">
-                {allHikes.map(someHike =>
-                    <Card 
-                        key={someHike.id}
-                        title={someHike.title}
-                        location={someHike.location}
-                        guide={someHike.guide}
-                        shortDescription={someHike.shortDescription}
-                        hikeId={someHike.hikeId}
-                        difficulty={someHike.difficulty}
-                        duration={someHike.duration}
-                        mainPicture={someHike.pictures[0]}
-                    />
-                )}
-            </Grid>
-        </Container>
-    </div>
-  );
+    const [allHikes, setAllHikes] = useState([]);
+
+    useEffect(()=>{
+        getAllHikes({setAllHikes});
+    }, []);
+
+    return (
+        <div key={'home'} className="home">
+            {allHikes.length > 0 ?
+                <Container maxWidth="lg" style={{minHeight: "100%"}}>
+                        <Grid container className="home-content">
+                            {allHikes.map(someHike => {
+                                return <Card
+                                    key={someHike.id}
+                                    title={someHike.title}
+                                    location={someHike.location}
+                                    guide={someHike.userId}
+                                    shortDescription={someHike.description}
+                                    hikeId={someHike.id}
+                                    difficulty={someHike.difficulty}
+                                    altitude={someHike.altitude}
+                                    duration={someHike.duration}
+                                />
+                            })}
+                        </Grid>
+                </Container>
+            :
+                <Loader/>
+            }
+        </div>
+    );
 }
 
 export default Home;
