@@ -44,6 +44,8 @@ function Signup(firebaseApp, email, password, gender, lastname, firstname, birth
 				firstname: firstname,
 				birthday: birthday,
 				role: 1
+			}).catch((e)=>{
+				console.log(e.code + " | " + e.message)
 			});
 		})
 		.then(()=>{

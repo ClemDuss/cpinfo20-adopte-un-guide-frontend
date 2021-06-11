@@ -90,3 +90,9 @@
 .card-inner .card-body h3{
     margin: 0.2em 0;
 }
+
+.card-body p{
+    min-height: 4.6rem !important;
+    max-height: 4.6rem !important;
+    overflow: hidden;
+}
