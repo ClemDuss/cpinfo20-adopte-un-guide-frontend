@@ -6,7 +6,7 @@ import SignWithGoogleButton from './shared/components/SignWithGoogleButton/SignW
 // import Button from './shared/components/Button/Button';
 
 import {Link} from 'react-router-dom';
-import { Dialog, DialogContent, DialogTitle, Slide, TextField, Grid } from '@material-ui/core';
+import { Dialog, DialogContent, DialogTitle, Slide, TextField, Grid, Select, FormControl, InputLabel, MenuItem } from '@material-ui/core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -26,19 +26,23 @@ const fromTopTransition = React.forwardRef(function fromTopTransition(props, ref
  * @param {firebase} firebaseApp	Permet la connexion avec firebase
  * @param {String} email			Email renseigné
  * @param {String} password			Mot de passe renseigné
+ * @param {String} gender			Genre renseigné
  * @param {String} lastname			Nom de famille renseigné
  * @param {String} firstname		Prénom renseigné
+ * @param {String} birthday			Date d'anniversaire renseigné
  * @param {function} setLoginOpen	Fonction d'actualisation de l'ouverture de la popup login
  */
-function Signup(firebaseApp, email, password, lastname, firstname, {setLoginOpen}){
+function Signup(firebaseApp, email, password, gender, lastname, firstname, birthday, {setLoginOpen}){
 	firebaseApp.auth().createUserWithEmailAndPassword(email, password)
 		.then((userCredential) => {
 			let user = userCredential.user;
 			return db.collection('users').doc(user.uid).set({
 				uid: user.uid,
 				email: email,
+				gender: gender,
 				lastname: lastname,
 				firstname: firstname,
+				birthday: birthday,
 				role: 1
 			}).catch((e)=>{
 				console.log(e.code + " | " + e.message)
@@ -73,7 +77,6 @@ function Signin(firebaseApp, email, password, {setLoginOpen}){
 }
 
 
-
 function Header({user, firebaseApp}) {
 	const [loginOpen, setLoginOpen] = useState(false);
 	const [signup, setSignup] = useState(false);
@@ -81,7 +84,9 @@ function Header({user, firebaseApp}) {
 	const [password, setPassword] = useState("")
 	const [firstname, setFirstname] = useState("")
 	const [lastname, setLastname] = useState("")
-
+	const [birthday, setBirthday] = useState("")
+	const [gender, setGender] = useState("")
+ 
 	myFirebaseApp = firebaseApp;
 	db = myFirebaseApp.firestore();
 
@@ -91,6 +96,8 @@ function Header({user, firebaseApp}) {
 			setPassword("");
 			setFirstname("");
 			setLastname("");
+			setGender(""); 
+			setBirthday("")
 		}
 	}, [loginOpen])
 
@@ -184,14 +191,29 @@ function Header({user, firebaseApp}) {
 				<DialogContent>
 				<form className="signin-form">
 					<Grid style={{display: "flex"}}>
-						<Grid item md={6}>
+						<Grid item md={2}>
+							<FormControl>
+								<InputLabel id="genderlabel">Civ.</InputLabel>
+								<Select
+									labelId="genderlabel"
+									id="gender-select"
+									value={gender}
+									onChange={(e)=>setGender(e.target.value)}
+								>
+									<MenuItem value={"M"}>M</MenuItem>
+									<MenuItem value={"F"}>Mme</MenuItem>
+								
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item md={5}>
 							<TextField
 								label="Nom" id="name" name="name" type="text"
 								value={lastname}
 								onChange={(e)=>setLastname(e.target.value)}
 							/>
 						</Grid>
-						<Grid item md={6}>
+						<Grid item md={5}>
 							<TextField
 								label="Prénom" id="firstname" name="firstname" type="text"
 								value={firstname}
@@ -199,6 +221,16 @@ function Header({user, firebaseApp}) {
 							/>
 						</Grid>
 					</Grid>
+					<TextField
+						id="date"
+						label="Birthday"
+						type="date"
+						value={birthday}
+						InputLabelProps={{
+						shrink: true,
+						}}
+						onChange={(e)=>setBirthday(e.target.value)}
+					/>
 					<TextField
 						label="Email" id="email" name="email" type="email"
 						value={email}
@@ -218,7 +250,7 @@ function Header({user, firebaseApp}) {
 						{/*<Button text="Valider" theme={'green-mtn'} outlined={true} onClick={()=>console.log('hello')}></Button>*/}
 						<button
 							className={"button button-green-mtn outlined"}
-							onClick={(e)=>{e.preventDefault(); Signup(firebaseApp, email, password, lastname, firstname, {setLoginOpen})}}
+							onClick={(e)=>{e.preventDefault(); Signup(firebaseApp, email, password, gender, lastname, firstname, birthday,{setLoginOpen})}}
 						>Valider</button>
 						<a href="/" onClick={(e) => {e.preventDefault(); setSignup(false)}}>Se connecter</a>
 					</div>
@@ -235,3 +267,4 @@ function Header({user, firebaseApp}) {
 }
 
 export default Header;
+
