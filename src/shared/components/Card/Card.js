@@ -38,7 +38,7 @@ export default function Card({...props}){
     }, [props.guide, props.hikeId]);
 
     return (
-        <Grid item lg={3} md={4} sm={6} xs={12} key={props.hikeId} className="card">
+        <Grid item lg={3} md={4} sm={6} xs={12} className="card">
             <Link to={`randos/${props.hikeId}`} className="card-link">
                 <div className="card-inner">
                 {/* <div className="card-inner" onClick={() => openHikeDetails(this.props.hikeId)}> */}
@@ -61,17 +61,17 @@ export default function Card({...props}){
                             <div className="hike-duration" title="Temps moyen pour l'ascention">
                                 <Timer/> <span>{timeToString(props.duration)}</span>
                             </div>
-                        :<></>}
+                        :<React.Fragment></React.Fragment>}
                         <div className="hike-difficulty" title={"Difficulté : " + props.difficulty + "/5"}>
                             {dispDifficulty(props.difficulty)}
                         </div>
                     </div>
                     <div className="card-body">
-                        <h2>{props.title ?? "Titre"}</h2>
-                        <h4><FontAwesomeIcon icon={faMapMarkerAlt} /> {props.location.start.name ?? "Lieu"}</h4>
-                        <h4><FontAwesomeIcon icon={faMountain} /> {props?.altitude}m</h4>
-                        <h3>{guide?.firstname} {guide?.lastname.substr(0,1)}</h3>
-                        <p>{props.shortDescription ?? "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}</p>
+                        <h2>{props.title?props.title: "Titre"}</h2>
+                        <h4><FontAwesomeIcon icon={faMapMarkerAlt} /> {props.location.start.name ? props.location.start.name : "Lieu"}</h4>
+                        <h4><FontAwesomeIcon icon={faMountain} /> {props.altitude ? props.altitude : ""}m</h4>
+                        <h3>{guide.firstname ? guide.firstname : ""} {guide.lastname ? guide.lastname.substr(0,1) : ""}</h3>
+                        <p>{props.shortDescription ? props.shortDescription : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}</p>
                     </div>
                 </div>
             </Link>

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './NewHike.css';
+import ReactMapGL, {Marker, Popup} from 'react-map-gl'; //composants MapBox
 
 import {Redirect} from 'react-router-dom';
 import {
@@ -119,6 +120,23 @@ export default function NewHike({user}){
     const [onLoad, setOnLoad]           = useState(true) //permet de savoir si la page est en cours de chargement
     const [newHikeId, setNewHikeId]     = useState(null) //ID de la rando qui sera générée
 
+    const [startLocation, setStartLocation]     = useState(null);
+    const [summitLocation, setSummitLocation]   = useState(null);
+    const [onSetStart, setOnSetStart]           = useState(null);
+    const [onSetSummit, setOnSetSummit]         = useState(null);
+    const [onSetLocation, setOnSetLocation]     = useState(null);
+
+
+    const [selectedMarker, setSelectedMarker] = useState(null); //pour mémoriser le marqueur sélectionné
+    //Définition du positionnement de base de la map
+    const [viewport, setViewport] = useState({
+        latitude: 45.899133822259564,
+        longitude: 6.126098759925073,
+        width: "100%",
+        height: "100%",
+        zoom: 12
+    });
+
     useEffect(()=>{
         if(user){
             setOnLoad(false);
@@ -132,11 +150,11 @@ export default function NewHike({user}){
     }, [newHikeId])
 
     return(
-        <>
+        <React.Fragment>
         {!onLoad && newHikeId ?
             <Redirect to={`/randos/${newHikeId}`}/>
         :!onLoad ?
-            <>
+            <React.Fragment>
             {user.role > 1 ?
                 <div className={"new-hike"}>
                     <Container maxWidth={"md"}>
@@ -152,6 +170,7 @@ export default function NewHike({user}){
                             </Grid>
                             <Grid item lg={6} md={6} sm={6} xs={6}>
                                 <div>Départ</div>
+
                                 <Grid>
                                     <Grid item lg={12} md={12}>
                                         <TextField
@@ -161,39 +180,40 @@ export default function NewHike({user}){
                                             onChange={(e)=>setStartName(e.target.value)}
                                         />
                                     </Grid>
-                                    <Grid item lg={6} md={6}>
-                                        <TextField
-                                            type={"number"}
-                                            label={"Latitude"}
-                                            variant={"outlined"}
-                                            value={startLat}
-                                            onChange={(e)=>setStartLat(e.target.value)}
-                                        />
-                                    </Grid>
-                                    <Grid item lg={6} md={6}>
-                                        <TextField
-                                            type={"number"}
-                                            label={"Longitude"}
-                                            variant={"outlined"}
-                                            value={startLng}
-                                            onChange={(e)=>setStartLng(e.target.value)}
-                                        />
-                                    </Grid>
-                                    {/*<Grid item lg={12} md={12}>*/}
-                                    {/*    <button*/}
-                                    {/*        className={"button button-green-mtn"}*/}
-                                    {/*        onClick={(e) => {*/}
-                                    {/*            e.preventDefault();*/}
-
-                                    {/*        }}*/}
-                                    {/*    >*/}
-                                    {/*        Select Start*/}
-                                    {/*    </button>*/}
+                                    {/*<Grid item lg={6} md={6}>*/}
+                                    {/*    <TextField*/}
+                                    {/*        type={"number"}*/}
+                                    {/*        label={"Latitude"}*/}
+                                    {/*        variant={"outlined"}*/}
+                                    {/*        value={startLat}*/}
+                                    {/*        onChange={(e)=>setStartLat(e.target.value)}*/}
+                                    {/*    />*/}
+                                    {/*</Grid>*/}
+                                    {/*<Grid item lg={6} md={6}>*/}
+                                    {/*    <TextField*/}
+                                    {/*        type={"number"}*/}
+                                    {/*        label={"Longitude"}*/}
+                                    {/*        variant={"outlined"}*/}
+                                    {/*        value={startLng}*/}
+                                    {/*        onChange={(e)=>setStartLng(e.target.value)}*/}
+                                    {/*    />*/}
                                     {/*</Grid>*/}
                                 </Grid>
+
+                                <button
+                                    className={'button button-green-mtn outlined'}
+                                    onClick={(e)=>{
+                                        e.preventDefault();
+                                        setOnSetLocation(true);
+                                        setOnSetStart(true);
+                                    }}
+                                >
+                                    Sélectionner départ
+                                </button>
                             </Grid>
                             <Grid item lg={6} md={6} sm={6} xs={6}>
                                 <div>Sommet</div>
+
                                 <Grid>
                                     <Grid item lg={12} md={12}>
                                         <TextField
@@ -203,25 +223,100 @@ export default function NewHike({user}){
                                             onChange={(e)=>setSummitName(e.target.value)}
                                         />
                                     </Grid>
-                                    <Grid item lg={6} md={6}>
-                                        <TextField
-                                            type={"number"}
-                                            label={"Latitude"}
-                                            variant={"outlined"}
-                                            value={summitLat}
-                                            onChange={(e)=>setSummitLat(e.target.value)}
-                                        />
-                                    </Grid>
-                                    <Grid item lg={6} md={6}>
-                                        <TextField
-                                            type={"number"}
-                                            label={"Longitude"}
-                                            variant={"outlined"}
-                                            value={summitLng}
-                                            onChange={(e)=>setSummitLng(e.target.value)}
-                                        />
-                                    </Grid>
+                                    {/*<Grid item lg={6} md={6}>*/}
+                                    {/*    <TextField*/}
+                                    {/*        type={"number"}*/}
+                                    {/*        label={"Latitude"}*/}
+                                    {/*        variant={"outlined"}*/}
+                                    {/*        value={summitLat}*/}
+                                    {/*        onChange={(e)=>setSummitLat(e.target.value)}*/}
+                                    {/*    />*/}
+                                    {/*</Grid>*/}
+                                    {/*<Grid item lg={6} md={6}>*/}
+                                    {/*    <TextField*/}
+                                    {/*        type={"number"}*/}
+                                    {/*        label={"Longitude"}*/}
+                                    {/*        variant={"outlined"}*/}
+                                    {/*        value={summitLng}*/}
+                                    {/*        onChange={(e)=>setSummitLng(e.target.value)}*/}
+                                    {/*    />*/}
+                                    {/*</Grid>*/}
                                 </Grid>
+
+                                <button
+                                    className={'button button-green-mtn outlined'}
+                                    onClick={(e)=>{
+                                        e.preventDefault();
+                                        setOnSetLocation(true);
+                                        setOnSetSummit(true);
+                                    }}
+                                >
+                                    Sélectionner sommet
+                                </button>
+                            </Grid>
+                            <Grid item lg={12} md={12} style={{height: '20rem'}}>
+                                <ReactMapGL
+                                    {...viewport}
+                                    mapStyle={'mapbox://styles/clemduss/ckobemc2g10xh18nqwg3dz42p'}
+
+                                    mapboxApiAccessToken={'pk.eyJ1IjoiY2xlbWR1c3MiLCJhIjoiY2tvYmVhcW80MWJzejJ5cWs0eTluMHJ4eSJ9.Xa1ME1Y-RWPWrqy_8-h3dQ'}
+                                    onViewportChange={viewport => {
+                                        setViewport(viewport);
+                                    }}
+                                    onClick={(e)=>{
+                                        if(onSetLocation){
+                                            if(onSetStart){
+                                                setStartLocation(e.lngLat);
+                                                setOnSetStart(false);
+                                                setStartLng(e.lngLat[0]);
+                                                setStartLat(e.lngLat[1]);
+                                            }else if(onSetSummit){
+                                                setSummitLocation(e.lngLat);
+                                                setOnSetSummit(false);
+                                                setSummitLng(e.lngLat[0]);
+                                                setSummitLat(e.lngLat[1]);
+                                            }
+                                            setOnSetLocation(false);
+                                        }
+                                    }}
+                                >
+                                    {startLocation &&
+                                    <Marker
+                                        latitude={startLocation[1]}
+                                        longitude={startLocation[0]}
+                                    >
+                                        <button className="marker-btn" onClick={(e) => {
+                                            e.preventDefault();
+                                            setSelectedMarker({name: startName, lat: startLocation[1], lng: startLocation[0]})
+                                        }}>
+                                            <img alt={"Départ"} src="/img/icons/hiking-solid.svg"/>
+                                        </button>
+                                    </Marker>
+                                    }
+                                    {summitLocation &&
+                                    <Marker
+                                        latitude={summitLocation[1]}
+                                        longitude={summitLocation[0]}
+                                    >
+                                        <button className="marker-btn" onClick={(e) => {
+                                            e.preventDefault();
+                                            setSelectedMarker({name: summitName, lat: summitLocation[1], lng: summitLocation[0]})
+                                        }}>
+                                            <img alt={"Sommet"} src="/img/icons/mountain-solid.svg"/>
+                                        </button>
+                                    </Marker>
+                                    }
+                                    {selectedMarker &&
+                                    //Affichage du détail du markeur
+                                    <Popup
+                                        latitude={selectedMarker.lat}
+                                        longitude={selectedMarker.lng}
+                                        onClose={() => setSelectedMarker(null)}
+                                    >
+                                        <div>{selectedMarker.name}</div>
+                                    </Popup>
+                                    }
+                                </ReactMapGL>
                             </Grid>
                             <Grid item lg={12} md={12}>
                                 <TextField
@@ -273,7 +368,10 @@ export default function NewHike({user}){
                                     type={"file"}
                                     accept={"image/jpeg"}
                                     className={"button button-green-mtn outlined"}
-                                    onChange={(e)=>{console.log(e.target.files); setImage(e.target.files[0])}}
+                                    onChange={(e)=>{
+                                        console.log(e.target.files);
+                                        setImage(e.target.files[0]);
+                                    }}
                                 />
                             </Grid>
                         </Grid>
@@ -305,12 +403,12 @@ export default function NewHike({user}){
             :
                 <Redirect to={"/"} />
             }
-            </>
+            </React.Fragment>
         :
-            <>
+            <React.Fragment>
                 <Loader/>
-            </>
+            </React.Fragment>
         }
-        </>
+        </React.Fragment>
     )
 }

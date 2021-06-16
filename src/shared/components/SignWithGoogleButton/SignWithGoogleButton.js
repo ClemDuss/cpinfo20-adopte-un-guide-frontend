@@ -1,5 +1,6 @@
 import googleLogo from './../../../assets/img/logos/Google__G__Logo.svg';
 import './SignWithGoogleButton.css';
+import React from 'react';
 
 import firebase from 'firebase';
 
