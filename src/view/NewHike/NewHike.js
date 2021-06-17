@@ -254,7 +254,7 @@ export default function NewHike({user}){
                                     Sélectionner sommet
                                 </button>
                             </Grid>
-                            <Grid item lg={12} md={12} style={{height: '20rem'}}>
+                            <Grid item lg={12} md={12} style={{height: '20rem'}} id={onSetLocation ? 'new-hike-map' : ''}>
                                 <ReactMapGL
                                     {...viewport}
                                     mapStyle={'mapbox://styles/clemduss/ckobemc2g10xh18nqwg3dz42p'}
