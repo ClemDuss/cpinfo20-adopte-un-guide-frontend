@@ -11,7 +11,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 
 import firebaseApp from './shared/services/firebase';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 
 function App() {

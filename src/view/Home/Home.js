@@ -5,7 +5,7 @@ import Card from './../../shared/components/Card/Card';
 
 // import allHikes from './../../shared/data/allHikes';
 import { getAllHikes } from '../../shared/services/functions';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Loader from "../Loader/Loader";
 
 

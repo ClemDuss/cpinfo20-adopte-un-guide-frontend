@@ -17,3 +17,7 @@
     flex-wrap: wrap;
 }
 
+#new-hike-map > div{
+    cursor: crosshair !important;
+}
+

@@ -81,10 +81,12 @@ function Hike() {
                                     <h4 className="hike-location">
                                         <FontAwesomeIcon icon={faMountain}/> {theHike.altitude}
                                     </h4>
+                                    {guide &&
                                     <h4 className="hike-guide">
                                         <FontAwesomeIcon
-                                            icon={faHiking}/> {guide?.firstname} {guide?.lastname.substr(0, 1)}
+                                            icon={faHiking}/> {guide.firstname} {guide.lastname.substr(0, 1)}
                                     </h4>
+                                    }
                                     <h4 className="hike-difficulty">
                                         {dispDifficulty(theHike.difficulty)}
                                     </h4>

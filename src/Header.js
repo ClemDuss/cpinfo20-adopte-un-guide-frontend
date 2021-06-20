@@ -155,7 +155,7 @@ function Header({user, firebaseApp}) {
 			aria-describedby="login-dialog-description"
 		>
 			{!signup ?
-			<>
+			<React.Fragment>
 				<DialogTitle id="login-dialog-title">Connexion</DialogTitle>
 				<DialogContent>
 					{/* <DialogContentText id="login-dialog-description">
@@ -184,9 +184,9 @@ function Header({user, firebaseApp}) {
 					</form>
 					<SignWithGoogleButton firebaseApp={firebaseApp} setLoginOpen={setLoginOpen} style={{marginBottom: '1em'}} />
 				</DialogContent>
-			</>
+			</React.Fragment>
 			:
-			<>
+			<React.Fragment>
 				<DialogTitle id="login-dialog-title">Inscription</DialogTitle>
 				<DialogContent>
 				<form className="signin-form">
@@ -256,7 +256,7 @@ function Header({user, firebaseApp}) {
 					</div>
 				</form>
 				</DialogContent>
-			</>
+			</React.Fragment>
 			}
 			{/* <DialogActions>
 				<Button theme={'error'} outlined={true} onClick={() => setLoginOpen(false)} text={'ANNULER'}></Button>
