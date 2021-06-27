@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom';
 import { Dialog, DialogContent, DialogTitle, Slide, TextField, Grid, Select, FormControl, InputLabel, MenuItem } from '@material-ui/core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import Button from "./shared/components/Button/Button";
 
 //décommenter la ligne suivante pour l'intelisence lors du DEV mais n'est pas nécessaire au bon fonctionnement
 // import firebase from 'firebase';
@@ -113,9 +114,9 @@ function Header({user, firebaseApp}) {
 			<div className={"right-elements"}>
 				{user.role > 1 &&
 					<Link to={"/nouvelle-rando"} style={{display: "flex", alignItems: "center", textDecoration: "none"}}>
-						<button className={"new-hike-btn button button-white outlined"}>
-							<FontAwesomeIcon icon={faPlus}/> Nouvel itinéraire
-						</button>
+						<Button className={"new-hike-btn button button-white outlined"} theme={'white'} outlined={true}>
+							<FontAwesomeIcon icon={faPlus}/>&nbsp;Nouvel itinéraire
+						</Button>
 					</Link>
 				}
 				<div className="user-settings">
@@ -128,6 +129,9 @@ function Header({user, firebaseApp}) {
 					<div className="user-options">
 						<div>Paramètres</div>
 						<div className="mail-box">Messagerie</div>
+						<Link to={'/mes-reservations'} className="my-reservations">
+							Mes réservations
+						</Link>
 						<div onClick={() => firebaseApp.auth().signOut()}>Déconnexion</div>
 					</div>
 				</div>

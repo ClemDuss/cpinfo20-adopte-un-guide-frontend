@@ -8,9 +8,26 @@ import {dispDifficulty, getGuideById, getHikeById, getMainPicture} from '../../s
 
 import landscape from './../../assets/img/1.jpg'; //import de l'image défault des randos
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faHiking, faMapMarkerAlt, faMountain} from '@fortawesome/free-solid-svg-icons'; //icons FontAwesome
+import {faHiking, faMapMarkerAlt, faMountain, faTicketAlt} from '@fortawesome/free-solid-svg-icons'; //icons FontAwesome
 import Loader from "../Loader/Loader";
+import Button from "../../shared/components/Button/Button";
+import firebaseApp from "../../shared/services/firebase";
 
+
+function HikeBooking(hikeId, userId){
+    alert('réservation');
+    firebaseApp.firestore().collection('booking').add({
+        date: new Date(),
+        userId: userId,
+        hikeId: hikeId
+    })
+        .then((docRef)=>{
+            console.log(docRef)
+        })
+        .catch((error)=>{
+            console.log(`HikeBooking() => ${error.code} | ${error.message}`)
+        })
+}
 
 
 /**
@@ -18,7 +35,7 @@ import Loader from "../Loader/Loader";
  * @returns {JSX.Element}
  * @constructor
  */
-function Hike() {
+function Hike({user}) {
     const {hikeId} = useParams(); //id de la rando sélectionnée
     const [theHike, setTheHike] = useState(null); //la rando sélectionnée
     const [mainPicture, setMainPicture] = useState(null);
@@ -84,15 +101,31 @@ function Hike() {
                                     {guide &&
                                     <h4 className="hike-guide">
                                         <FontAwesomeIcon
-                                            icon={faHiking}/> {guide.firstname} {guide.lastname.substr(0, 1)}
+                                            icon={faHiking}/> {guide?.firstname} {guide?.lastname.substr(0, 1)}
                                     </h4>
                                     }
                                     <h4 className="hike-difficulty">
-                                        {dispDifficulty(theHike.difficulty)}
+                                        {dispDifficulty(theHike?.difficulty)}
                                     </h4>
                                     <p>
-                                        {theHike.description}
+                                        {theHike?.description}
                                     </p>
+                                    {user &&
+                                        <div style={{display: "flex", justifyContent: 'center'}}>
+                                            <Button
+                                                theme={'green-mtn'}
+                                                outlined={true}
+                                                onClick={(e)=>{
+                                                        e.preventDefault();
+                                                        HikeBooking(hikeId, user.uid);
+                                                    }
+                                                }
+                                            >
+                                                <FontAwesomeIcon icon={faTicketAlt}/>&nbsp;
+                                                Réserver
+                                            </Button>
+                                        </div>
+                                    }
                                 </Grid>
                             </Grid>
                             {/* Petit tuto sur l'ajout de la map mapbox via React*/}

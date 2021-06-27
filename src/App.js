@@ -6,12 +6,14 @@ import Footer from './shared/components/Footer/Footer';
 import Home from './view/Home/Home';
 import Hike from './view/Hike/Hike';
 import NewHike from './view/NewHike/NewHike';
+import Legal from './view/Legal/Legal'
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 
 import firebaseApp from './shared/services/firebase';
 import React, {useEffect, useState} from 'react';
+import MyBookings from "./view/MyBookings/MyBookings";
 
 
 function App() {
@@ -49,12 +51,18 @@ function App() {
         <Route path="/" exact>
           <Home firebaseApp={firebaseApp}/>
         </Route>
-        <Route path="/randos/:hikeId" component={Hike} />
+        <Route path="/randos/:hikeId">
+            <Hike user={user}/>
+        </Route>
           <Route path="/nouvelle-rando">
               <NewHike
                 user={user}
               />
           </Route>
+          <Route path="/mes-reservations">
+              <MyBookings user={user}/>
+          </Route>
+          <Route path={"/mentions-legales"} component={Legal}/>
         <Route render={() => <h1 style={{paddingTop: '3.5em'}}>404: page introuvable</h1>} />
       </Switch>
       <Footer />

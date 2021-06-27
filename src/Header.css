@@ -139,6 +139,17 @@
     background-color: lightgray;
 }
 
+.user-options a{
+    padding: 0.5em 0.75em;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.user-options a:hover{
+    background-color: lightgray;
+}
+
 .user-options div:first-child{
     border-radius: 0.4em 0.4em 0 0;
 }
