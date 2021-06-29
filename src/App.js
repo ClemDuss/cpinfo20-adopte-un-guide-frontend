@@ -7,6 +7,7 @@ import Home from './view/Home/Home';
 import Hike from './view/Hike/Hike';
 import NewHike from './view/NewHike/NewHike';
 import Legal from './view/Legal/Legal'
+import Chat from './shared/components/Chat/Chat'
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
