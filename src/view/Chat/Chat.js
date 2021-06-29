@@ -4,7 +4,12 @@ import { Store, Cloud } from '@material-ui/icons';
 function Chat() {
     return(
         <div className="chat">
-            <button className="chat-button">CHAT</button>
+            <div className="button-container">
+                <div className="left-button"></div>
+                <button className="chat-button">CHAT</button>
+                <div className="right-button"></div>
+            </div>
+            
         </div>
     )
 }
