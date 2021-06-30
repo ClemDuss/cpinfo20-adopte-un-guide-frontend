@@ -74,7 +74,7 @@
     width: 2em;
 }
 
-.header .user-settings .user-info::before{
+/*.header .user-settings .user-info::before{
     position: absolute;
     content: "10";
     height: 1em;
@@ -89,7 +89,7 @@
     display: flex;
     align-items: center;
     justify-content:center;
-}
+}*/
 
 .header .user-settings:hover :is(.user-info, .login-button){
     background-color: var(--green-mountain-hover);

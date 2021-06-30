@@ -3,6 +3,7 @@ import firebaseApp from "../../shared/services/firebase";
 import {useEffect, useState} from "react";
 import Loader from './../Loader/Loader';
 import {Container} from "@material-ui/core";
+import {Redirect} from "react-router-dom";
 
 /**
  * Récupérer toutes les réservations d'un utilisateur
@@ -43,18 +44,18 @@ function ReservationsToHikes(allBooks, {setAllHikesBooked, setOnLoad}){
                 });
                 console.log(allHikes)
                 setAllHikesBooked(allHikes);
+                setOnLoad(false);
             })
             .catch((error)=>{
                 console.log(`getReservationsByUser ${error.code} | ${error.message}`)
+                setOnLoad(false);
             })
     }
-    setOnLoad(false);
 }
 
 function SomeBooking({...props}){
     const [myHike, setMyHike] = useState(null);
     const [isGetted, setIsGetted] = useState(false);
-    const [guideId, setGuideId] = useState(null);
     const [guide, setGuide] = useState(null)
 
     useEffect(()=> {
@@ -104,34 +105,40 @@ function MyBookings({user}) {
     const [allBooks, setAllBooks] = useState([]);
     const [allHikesBooked, setAllHikesBooked] = useState(null)
 
-    useEffect(()=>{
+    useEffect(() => {
         getReservationsByUser(user, {setAllBooks})
     }, [user]);
 
-    useEffect(()=>{
+    useEffect(() => {
         setAllHikesBooked([]);
         ReservationsToHikes(allBooks, {setAllHikesBooked, setOnLoad});
     }, [allBooks]);
 
     return (
         <>
-            {!onLoad ?
-                <Container className={'my-bookings'} maxWidth={'lg'}>
-                    {allHikesBooked.length > 0 ?
-                        <div>
-                            Toutes les réservations pour vous
-                            {allBooks.map(someBook => {
-                                return (
-                                    <SomeBooking hikeId={someBook.hikeId}/>
-                                )
-                            })}
-                        </div>
+            {user ?
+                <>
+                    {!onLoad ?
+                        <Container className={'my-bookings'} maxWidth={'lg'}>
+                            {allHikesBooked.length > 0 ?
+                                <div>
+                                    <h2>Toutes vos réservations :</h2>
+                                    {allBooks.map(someBook => {
+                                        return (
+                                            <SomeBooking hikeId={someBook.hikeId}/>
+                                        )
+                                    })}
+                                </div>
+                                :
+                                <h2>Aucune réservation</h2>
+                            }
+                        </Container>
                         :
-                        <div>Aucune réservation</div>
+                        <Loader/>
                     }
-                </Container>
+                </>
                 :
-                <Loader/>
+                <Redirect to={'/'}/>
             }
         </>
     );

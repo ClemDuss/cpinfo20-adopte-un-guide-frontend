@@ -139,6 +139,7 @@ function Hike({user}) {
                                     onViewportChange={viewport => {
                                         setViewport(viewport);
                                     }}
+                                    style={{boxShadow: '0px 0px 10px black'}}
                                 >
                                     {/*Ajout des marqueurs de départ et d'arrivée de la Rando*/}
                                     <Marker

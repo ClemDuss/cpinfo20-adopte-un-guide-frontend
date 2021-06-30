@@ -4,8 +4,7 @@
 
 .new-hike .MuiTextField-root{
     width: 100%;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem 0.2rem;
 }
 
 .new-hike .MuiGrid-root{

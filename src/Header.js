@@ -193,7 +193,7 @@ function Header({user, firebaseApp}) {
 					</div>
 					<div className="user-options">
 						<div>Paramètres</div>
-						<div className="mail-box">Messagerie</div>
+						{/*<div className="mail-box">Messagerie</div>*/}
 						<Link to={'/mes-reservations'} className="my-reservations">
 							Mes réservations
 						</Link>
