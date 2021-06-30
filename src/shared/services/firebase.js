@@ -4,6 +4,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const firebaseConfig = {
+
     /** CLEM **/
     // apiKey: "AIzaSyCFemNj88TT5qth40VFY6pybmN6B6xQbvg",
     // authDomain: "adopte-un-guide.firebaseapp.com",

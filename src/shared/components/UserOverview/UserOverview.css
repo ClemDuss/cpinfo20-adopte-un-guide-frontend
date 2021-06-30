@@ -1,0 +1,41 @@
+.container {
+    width: 100%;
+    border: solid 2px lightgray;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 2px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+}
+
+.overview-user-name {
+    width: 15%;
+}
+
+.overview-user-gender {
+    font-weight: bold;
+}
+
+.overview-user-infos {
+    display: inline-block;
+    font-style: italic;
+    width: 15%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: gray;
+}
+
+.overview-user-birthday {
+    width: 15%;
+}
+
+.overview-user-photo {
+    width: 5%
+}
+
+.photo {
+    width: 100%
+}

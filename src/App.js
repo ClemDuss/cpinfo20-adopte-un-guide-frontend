@@ -5,6 +5,7 @@ import Header from './Header';
 import Footer from './shared/components/Footer/Footer';
 import Home from './view/Home/Home';
 import Hike from './view/Hike/Hike';
+import AccountManagement from './view/AccountManagement/AccountManagement';
 import NewHike from './view/NewHike/NewHike';
 import Chat from './view/Chat/Chat';
 import Legal from './view/Legal/Legal';
@@ -35,7 +36,6 @@ function App() {
           }).catch((error)=>{
             console.log(error.code + " | " + error.message);
           });
-
         
         return;
       }
@@ -62,6 +62,9 @@ function App() {
           </Route>
           <Route path="/mes-reservations">
               <MyBookings user={user}/>
+          </Route>
+          <Route path="/users">
+            <AccountManagement user={user}></AccountManagement>
           </Route>
           <Route path={"/mentions-legales"} component={Legal}/>
         <Route render={() => <iframe style={{height: '100%', width: '100%'}} src="/404.html" frameborder="0"></iframe>} />

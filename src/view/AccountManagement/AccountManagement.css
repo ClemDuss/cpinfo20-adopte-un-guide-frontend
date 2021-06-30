@@ -1,0 +1,19 @@
+.account-management {
+    padding-top: 5rem;
+}
+
+.nav-actions {
+    margin: auto;
+}
+
+.actions-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    
+}
+
+.MuiButton-startIcon {
+    margin: 0 !important;
+}
