@@ -42,7 +42,9 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home}></Route>
         <Route path="/randos/:hikeId" component={Hike} />
-        <Route path="/users" component={AccountManagement} />
+        <Route path="/users">
+          <AccountManagement user={user}></AccountManagement>
+        </Route>
         <Route render={() => <h1 style={{paddingTop: '3.5em'}}>404: page introuvable</h1>} />
       </Switch>
       <Footer />

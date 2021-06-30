@@ -1,12 +1,13 @@
 .container {
     width: 100%;
-    border: solid 2px;
+    border: solid 2px lightgray;
     border-radius: 5px;
     margin: 5px;
     padding: 2px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background-color: white;
 }
 
 .overview-user-name {
@@ -25,6 +26,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     color: gray;
+}
+
+.overview-user-birthday {
+    width: 15%;
 }
 
 .overview-user-photo {
