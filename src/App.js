@@ -26,8 +26,7 @@ function App() {
           displayName: newUser.displayName,
           email: newUser.email,
           picture: newUser.photoURL
-        });
-        
+        });        
         return;
       }
 

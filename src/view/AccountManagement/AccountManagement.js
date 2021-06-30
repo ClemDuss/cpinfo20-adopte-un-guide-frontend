@@ -117,7 +117,7 @@ function AccountManagement({user}) {
                         />
                     )}
                 </Grid>
-            </Container> 
+            </Container>
         </div>
     );
 }
