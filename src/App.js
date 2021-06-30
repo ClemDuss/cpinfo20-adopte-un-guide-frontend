@@ -6,7 +6,8 @@ import Footer from './shared/components/Footer/Footer';
 import Home from './view/Home/Home';
 import Hike from './view/Hike/Hike';
 import NewHike from './view/NewHike/NewHike';
-import Legal from './view/Legal/Legal'
+import Chat from './view/Chat/Chat';
+import Legal from './view/Legal/Legal';
 
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 
@@ -65,6 +66,7 @@ function App() {
           <Route path={"/mentions-legales"} component={Legal}/>
         <Route render={() => <iframe style={{height: '100%', width: '100%'}} src="/404.html" frameborder="0"></iframe>} />
       </Switch>
+      <Chat></Chat>
       <Footer />
     </Router>
   );
