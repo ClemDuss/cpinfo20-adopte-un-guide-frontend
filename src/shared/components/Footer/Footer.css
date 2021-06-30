@@ -11,3 +11,11 @@
 .footer span{
     padding-bottom: 0.75rem;
 }
+
+@media screen and (max-width: 985px){
+    .footer{
+        background-repeat: no-repeat;
+        background-color: #2C722C;
+        background-image: none !important;
+    }
+}
