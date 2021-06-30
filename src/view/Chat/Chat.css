@@ -1,0 +1,118 @@
+.chat-container {
+    width: 300px;
+    height: 400px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: var(--green-mountain);
+    transition: bottom 0.5s;
+    border-radius: 5px 5px 0 0;
+}
+.chat-closed {
+    bottom: -400px;
+}
+
+.button-container {
+    display: flex;
+}
+
+.chat-button {
+    color: white;
+    background-color: var(--green-mountain);
+    border: none;
+    border-radius: 10px 10px 0px 0px;
+    position: relative;
+    width: 100px;
+    height: 25px;
+    bottom: 25px;
+    cursor: pointer;
+}
+
+.left-shadow {
+    position: relative;
+    width: 50px;
+    height: 15px;
+    background-color: rgba(0,0,0,0);
+    border-radius: 0 0 20px 0;
+    bottom: 15px;
+    box-shadow: 20px 0 0 0 var(--green-mountain);
+}
+
+.right-shadow {
+    position: relative;
+    width: 150px;
+    height: 15px;
+    background: rgba(0,0,0,0);
+    border-radius: 0 0 0 20px;
+    bottom: 15px;
+    box-shadow: -20px 0 0 0 var(--green-mountain);
+}
+
+.msg-window {
+    width: 260px;
+    height: 300px;
+    margin: auto;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.interaction {
+    width: 300px;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    bottom: 0;
+}
+
+.text-box {
+    outline: none;
+    border-radius: 10px;
+    padding: 5px;
+    border: solid 1px lightgray;
+    width: 200px;
+    height: 40px;
+    background-color: whitesmoke;
+    transition: background-color 0.5s;
+}
+
+.text-box:focus {
+    background-color: white;
+}
+
+.send-button {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+}
+
+.send-button-container {
+    background-color: white;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.MuiButton-startIcon {
+    margin: 0 !important; 
+}
+
+.fake-msg {
+    border-radius: 10px 10px 10px 0;
+    background-color: #e3eaa7;
+    max-width: 60%;
+    min-height: 25px;
+    margin: 0 10px 10px 10px;
+    padding: 10px;
+}
+
+.fake-author {
+    font-size: 0.8rem;
+    margin-left: 10px;
+    color: lightgray;
+}
+
+textarea { resize: none; }
