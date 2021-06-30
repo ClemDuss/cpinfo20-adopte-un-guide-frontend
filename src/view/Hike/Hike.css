@@ -3,12 +3,15 @@
 }
 
 .hike-details-content{
-    background-color: #E6E6E6;
+    /*background-color: #E6E6E6;
     border-color: #a1a1a1 !important;
     border: 0.1rem solid;
-    border-bottom: 0;
-    padding: 0.5rem;
+    border-bottom: 0;*/
+    padding: 0.5rem 0.5rem 2rem;
     border-radius: 1rem 1rem 0 0;
+}
+
+.hike-details-content-grid{
     display: flex;
 }
 
@@ -39,3 +42,38 @@
     font-style: italic;
     color: var(--muted)
 }
+
+
+.hike-details #map{
+    width: 100%;
+    height: 30rem;
+    background-color: var(--dark-grey);
+}
+
+
+.marker-btn{
+    cursor: pointer
+}
+
+.marker-btn img{
+    width: 1rem;
+    height: 1rem;
+}
+
+/*Pour centrer la popup au dessus des Markers*/
+.mapboxgl-popup{
+    margin-left: 1rem !important;
+}
+
+/*Pour gérer le style de la popup mapbox*/
+.mapboxgl-popup-content{
+    padding-top: 1.2em !important;
+    padding-bottom: 1.2em !important;
+    border-radius: 0.5em !important;
+}
+
+.mapboxgl-popup-content .mapboxgl-popup-close-button{
+    font-size: 1em;
+    font-weight: bold;
+}
+

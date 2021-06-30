@@ -1,0 +1,22 @@
+.new-hike{
+    padding-top: 5rem;
+}
+
+.new-hike .MuiTextField-root{
+    width: 100%;
+    margin: 0.5rem 0.2rem;
+}
+
+.new-hike .MuiGrid-root{
+    padding: 0.5rem;
+}
+
+.new-hike-form{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#new-hike-map > div{
+    cursor: crosshair !important;
+}
+

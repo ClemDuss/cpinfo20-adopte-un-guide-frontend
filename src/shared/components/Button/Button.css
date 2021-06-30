@@ -1,10 +1,26 @@
 .button{
     color: white;
+    font-family: 'Roboto', sans-serif;
+    /*'-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"'*/
+    font-size: 1rem;
     padding: 0.5em 1em;
     margin: 0.3em;
     border-radius: 0.3em;
+    border: none;
     font-weight: 500;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.2s ease;
     background-color: var(--primary);
 }
@@ -95,4 +111,26 @@
 .button.button-green-mtn.outlined:hover{
     border-color: var(--green-mountain-hover);
     color: var(--green-mountain-hover);
+}
+
+
+/* WHITE */
+.button.button-white{
+    background-color: var(--light-grey);
+}
+
+.button.button-white:hover{
+    background-color: var(--light-grey);
+}
+
+.button.button-white.outlined{
+    border: 0.1em solid var(--light-grey);
+    background-color: unset;
+    color: var(--light-grey);
+}
+
+.button.button-white.outlined:hover{
+    border-color: var(--light-grey);
+    color: var(--white);
+    background-color: rgba(220, 220, 220, 0.3);
 }
