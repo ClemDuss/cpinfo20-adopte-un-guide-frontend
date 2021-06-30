@@ -2,8 +2,9 @@ import './MyBookings.css';
 import firebaseApp from "../../shared/services/firebase";
 import {useEffect, useState} from "react";
 import Loader from './../Loader/Loader';
-import {Container} from "@material-ui/core";
+import {Container, Grid} from "@material-ui/core";
 import {Redirect} from "react-router-dom";
+import Card from "../../shared/components/Card/Card";
 
 /**
  * Récupérer toutes les réservations d'un utilisateur
@@ -90,9 +91,19 @@ function SomeBooking({...props}){
     return (
         <>
             {myHike != null ?
-                <div className={'booking-line'}>
-                    {myHike.title} avec {guide?.firstname}
-                </div>
+                // <div className={'booking-line'}>
+                //     {myHike.title} avec {guide?.firstname}
+                // </div>
+                <Card
+                    key={myHike.id}
+                    title={myHike.title}
+                    location={myHike.location}
+                    guide={myHike.userId}
+                    shortDescription={myHike.description}
+                    hikeId={myHike.id}
+                    difficulty={myHike.difficulty}
+                    altitude={myHike.altitude}
+                    duration={myHike.duration}/>
                 :
                 <></>
             }
@@ -123,11 +134,13 @@ function MyBookings({user}) {
                             {allHikesBooked.length > 0 ?
                                 <div>
                                     <h2>Toutes vos réservations :</h2>
-                                    {allBooks.map(someBook => {
-                                        return (
-                                            <SomeBooking hikeId={someBook.hikeId}/>
-                                        )
-                                    })}
+                                    <Grid container style={{display: "flex", justifyContent: 'center'}}>
+                                        {allBooks.map(someBook => {
+                                            return (
+                                                <SomeBooking hikeId={someBook.hikeId}/>
+                                            )
+                                        })}
+                                    </Grid>
                                 </div>
                                 :
                                 <h2>Aucune réservation</h2>

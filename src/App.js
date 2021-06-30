@@ -8,7 +8,7 @@ import Hike from './view/Hike/Hike';
 import NewHike from './view/NewHike/NewHike';
 import Legal from './view/Legal/Legal'
 
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 
 
 import firebaseApp from './shared/services/firebase';
@@ -63,7 +63,7 @@ function App() {
               <MyBookings user={user}/>
           </Route>
           <Route path={"/mentions-legales"} component={Legal}/>
-        <Route render={() => <h1 style={{paddingTop: '3.5em'}}>404: page introuvable</h1>} />
+        <Route render={() => <iframe style={{height: '100%', width: '100%'}} src="/404.html" frameborder="0"></iframe>} />
       </Switch>
       <Footer />
     </Router>
