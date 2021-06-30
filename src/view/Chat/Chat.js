@@ -1,13 +1,22 @@
+import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
 import './Chat.css';
 import { Store, Cloud } from '@material-ui/icons';
+import SendIcon from '@material-ui/icons/Send';
 
 function Chat() {
+    const [isOpened, setIsOpened] = useState(false);
     return(
-        <div className="chat">
+        <div className="chat-container" style={{bottom: isOpened ? 0 : -400}}>
             <div className="button-container">
-                <div className="left-button"></div>
-                <button className="chat-button">CHAT</button>
-                <div className="right-button"></div>
+                <div className="left-shadow"></div>
+                <button className="chat-button" onClick={ () => {setIsOpened(!isOpened)}}>CHAT</button>
+                <div className="right-shadow"></div>
+            </div>
+            <div className="msg-window"></div>
+            <div className="interaction">
+                <textarea className="text-box"></textarea>
+                <Button className="send-button" startIcon={<SendIcon />}></Button>
             </div>
             
         </div>
