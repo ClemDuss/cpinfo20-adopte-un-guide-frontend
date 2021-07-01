@@ -193,6 +193,7 @@ function Header({user, firebaseApp}) {
 					</div>
 					<div className="user-options">
 						<div>Paramètres</div>
+						{ user.role > 2 && <Link to={'/users'} className="">Administration</Link> }
 						{/*<div className="mail-box">Messagerie</div>*/}
 						<Link to={'/mes-reservations'} className="my-reservations">
 							Mes réservations

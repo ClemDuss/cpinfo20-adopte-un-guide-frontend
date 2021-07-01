@@ -10,7 +10,7 @@ function Chat() {
         <div className="chat-container" style={{bottom: isOpened ? 0 : -400}}>
             <div className="button-container">
                 <div className="left-shadow"></div>
-                <button className="chat-button" onClick={ () => {setIsOpened(!isOpened)}}>CHAT</button>
+                <button className="chat-button" onClick={ () => {setIsOpened(!isOpened)}}>Messages</button>
                 <div className="right-shadow"></div>
             </div>
             <div className="msg-window">

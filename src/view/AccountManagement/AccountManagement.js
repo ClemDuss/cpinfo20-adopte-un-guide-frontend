@@ -19,7 +19,7 @@ function AccountManagement({user}) {
     const [isFirstPage, setIsFirstPage] = useState(true);
     const [isLastPage, setIsLastPage] = useState(false);
 
-    useEffect( () => {
+    function getUsersData() {
         let users = [];
         const db = firebaseApp.firestore();
         db.collection("users").get().then((querySnapshot) => {
@@ -30,6 +30,11 @@ function AccountManagement({user}) {
             });
             setAllUsers(users);
         });
+    }
+
+    useEffect( () => {
+        getUsersData();
+        //console.log(user);
     }, []);
 
     useEffect( () => {
@@ -70,7 +75,7 @@ function AccountManagement({user}) {
         if (displayedUsers.length < 10 || allUsers.length == ((nav * 10) + 10)) {
             setIsLastPage(true);
         } else {
-            console.log(displayedUsers);
+            //console.log(displayedUsers);
             setIsLastPage(false);
         }
         if (nav == 0) {
@@ -98,7 +103,7 @@ function AccountManagement({user}) {
         <div key={'accountManagement'} className="account-management">
             <Container maxWidth="md">
                 <div className="actions-container">
-                    <ButtonGroup color="primary" className="nav-actions">
+                    <ButtonGroup variant="contained" color="primary" className="nav-actions">
                         <Button startIcon={<NavigateBefore />} onClick={previousPage} disabled={isFirstPage}></Button>
                         <Button startIcon={<NavigateNext />} onClick={nextPage} disabled={isLastPage}></Button>
                     </ButtonGroup>

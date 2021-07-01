@@ -60,7 +60,7 @@
 }
 
 .interaction {
-    width: 300px;
+    width: 280px;
     padding: 10px;
     position: relative;
     display: flex;
@@ -86,7 +86,7 @@
 
 .send-button {
     width: 50px;
-    height: 50px;
+    height: 100%;
     background-color: white;
 }
 
@@ -102,7 +102,7 @@
 
 .fake-msg {
     border-radius: 10px 10px 10px 0;
-    background-color: #e3eaa7;
+    background-color: #8FBC8F;
     max-width: 60%;
     min-height: 25px;
     margin: 0 10px 10px 10px;
@@ -112,7 +112,11 @@
 .fake-author {
     font-size: 0.8rem;
     margin-left: 10px;
-    color: lightgray;
+    color: grey;
+}
+
+.MuiButton-root {
+    min-width: 0 !important;
 }
 
 textarea { resize: none; }

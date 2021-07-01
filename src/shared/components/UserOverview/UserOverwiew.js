@@ -23,6 +23,7 @@ function UserOverview(props) {
     const [blockLabel, setBlockLabel] = useState("");
     const [guideButtonDisabled, setGuideButtonDisabled] = useState(null);
     const [guestButtonDisabled, setGuestButtonDisabled] = useState(null);
+    const [blockButtonDisabled, setBlockButtonDisabled] = useState(null);
 
     useEffect( () => {
         if (props.role == 0) {
@@ -37,6 +38,9 @@ function UserOverview(props) {
         else setGuestButtonDisabled(true);
 
         setRole(props.role);
+
+        if (props.role > 2) setBlockButtonDisabled(true);
+        else setBlockButtonDisabled(false);
     }, []);
 
     useEffect( () => {
@@ -81,7 +85,7 @@ function UserOverview(props) {
             setRole(0);
             setGuideButtonDisabled(true);
             setGuestButtonDisabled(true);
-        }        
+        }
     }
 
     return (
@@ -95,14 +99,13 @@ function UserOverview(props) {
             <div className="overview-user-birthday">
                 {props.birthday}
             </div>
-            <p>{props.role}</p>
             <Button disabled={guideButtonDisabled} variant="outlined" size="small" color="primary" startIcon={<ArrowUpwardIcon />} onClick={() => makeGuide(props.uid)}>
                 Passer guide
             </Button>
             <Button disabled={guestButtonDisabled} variant="outlined" size="small" color="secondary" startIcon={<ArrowDownwardIcon />} onClick={() => makeGuest(props.uid)}>
                 Passer visiteur
             </Button>
-            <Button variant="contained" color="secondary" startIcon={<BlockIcon />} onClick={() => blockUser(props.uid)}>{blockLabel}</Button>
+            <Button disabled={blockButtonDisabled} variant="contained" color="secondary" startIcon={<BlockIcon />} onClick={() => blockUser(props.uid)}>{blockLabel}</Button>
         </div>
     )    
 }
